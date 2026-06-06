@@ -1,0 +1,4 @@
+interface:
+  display_name: "一步一步指导"
+  short_description: "每轮只给一个可执行下一步并等待反馈"
+  default_prompt: "Use $step-by-step-guide for this task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "LangGraph Agent 规划"
+  short_description: "创建 LangGraph Agent 前的图结构澄清"
+  default_prompt: "Use $langgraph-agent-planner for this task."

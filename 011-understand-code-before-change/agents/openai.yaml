@@ -1,0 +1,4 @@
+interface:
+  display_name: "先理解代码再改"
+  short_description: "先读懂代码结构和约束再实施需求"
+  default_prompt: "Use $understand-code-before-change for this task."

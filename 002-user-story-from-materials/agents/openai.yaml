@@ -1,0 +1,4 @@
+interface:
+  display_name: "生成 User Story"
+  short_description: "基于已有材料生成结构化用户故事文档"
+  default_prompt: "Use $user-story-from-materials for this task."

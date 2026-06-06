@@ -1,0 +1,4 @@
+interface:
+  display_name: "跨系统一致性对齐"
+  short_description: "对齐代码、需求、任务系统和外部系统"
+  default_prompt: "Use $cross-system-alignment for this task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "代码提交与 PR"
+  short_description: "提交前自检、提交、推送并发起 PR 的完整流程"
+  default_prompt: "Use $pr-check-commit-pr for this task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "多 Agent 架构师"
+  short_description: "多 Agent 系统角色、通信和调度设计"
+  default_prompt: "Use $multi-agent-architect for this task."
