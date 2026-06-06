@@ -1,4 +1,4 @@
 interface:
-  display_name: "LangChain Agent 规划"
-  short_description: "创建 LangChain Agent 前的需求澄清"
+  display_name: "LangChain Planner"
+  short_description: "Plan LangChain agents before implementation."
   default_prompt: "Use $langchain-agent-planner for this task."

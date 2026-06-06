@@ -1,35 +1,32 @@
-# 代码提交与 PR 详细工作流
+# Pre-PR Check, Commit, and Pull Request Workflow
 
-## 目标
+## Goal
 
-用于代码提交前的完整收口：理解需求和变更范围，检查工作区，执行真实场景自测，整理提交，推送分支并发起 PR。这个 skill 的重点不是“能 commit”，而是确认提交出去的东西确实能按用户真实使用方式工作。
+Close out code changes before review. The skill is not just for running git commit; it verifies the changed behavior through realistic user workflows, keeps the commit scope clean, and prepares a reviewable pull request.
 
-## 必须收集的信息
+## Information To Collect
 
-- 当前分支、目标分支、关联需求/issue/PR 描述。
-- 本次变更的功能范围、用户可见流程和不应触碰的文件。
-- 可用的测试账号、测试数据、环境变量、启动命令和验收方式。
+- Current branch, target branch, related issue or requirement.
+- Changed behavior, user-visible workflows, and files that must stay out of scope.
+- Test commands, dev server commands, test accounts, sample data, and required credentials.
 
-## 标准流程
+## Standard Procedure
 
-1. 读取 git 状态、最近提交、变更 diff 和相关项目文档，确认本次提交边界。
-2. 把理解到的需求、变更范围、测试计划和风险用简短镜像对齐；不清楚时先问。
-3. 执行仓库已有静态检查、单元测试、集成测试、构建检查。
-4. 对每个用户可见功能执行真实场景自测，记录步骤、输入、期望、实际和证据。
-5. 修复自测或检查发现的问题，并重新跑失败项。
-6. 生成清晰 commit message，提交只包含本次范围内的文件，推送分支并创建/准备 PR。
+1. Inspect git status, recent commits, changed files, and relevant requirements before staging anything.
+2. State the intended commit scope, excluded files, test plan, and unresolved assumptions.
+3. Run existing static checks, unit tests, integration tests, build checks, or repository-specific verification.
+4. Exercise every changed user-facing workflow with realistic data from the normal entry point.
+5. Fix failures and rerun the failed scenario before committing.
+6. Stage only the intended files, commit with a clear message, push the branch, and prepare or open the PR with verification evidence.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Summarize changed scope, checks run, scenario tests, commit hash, branch, PR link or blocker, and residual risk.

@@ -1,34 +1,32 @@
-# 先提问再实施完整 Demo 详细工作流
+# Clarify Before Building Demo Workflow
 
-## 目标
+## Goal
 
-用于完整 demo 交付前的需求澄清和闭环交付。重点是先确认业务闭环，再给可运行、可体验、经过真实场景自测的 demo。
+Build complete demos only after the core business loop is clear. The skill prevents shallow demo fragments by clarifying ambiguity, confirming scope, then validating the finished demo through realistic user interactions.
 
-## 必须收集的信息
+## Information To Collect
 
-- 目标用户、核心业务闭环、数据对象、关键流程。
-- 技术栈偏好、运行环境、UI/交互预期。
-- 测试账号、样例数据、验收动作和必须覆盖的功能。
+- Demo goal, target user, core business object, platform, and constraints.
+- Must-have workflows, nice-to-have features, sample data, and visual expectations.
+- Run command, environment, test accounts, and acceptance criteria.
 
-## 标准流程
+## Standard Procedure
 
-1. 一次只问一个最高优先级澄清问题。
-2. 在信息足够后输出需求镜像，请用户确认。
-3. 确认后实现完整可运行 demo，不交付碎片代码。
-4. 按功能清单逐个执行真实操作场景自测。
-5. 修复问题并复测，通过后交付运行方式、测试账号、覆盖结果和剩余风险。
+1. Ask the single highest-impact clarification question when the business loop is unclear.
+2. Mirror the confirmed requirement, included scope, excluded scope, and success criteria.
+3. Build the smallest complete runnable demo that covers the confirmed loop.
+4. Use existing project patterns when inside a codebase.
+5. Run the demo and test each user-visible workflow through the normal UI or command entry point.
+6. Fix failures and rerun the failed scenario before delivery.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Deliver runnable files or changes, run instructions, scenario-test evidence, test account/sample data, and known limitations.

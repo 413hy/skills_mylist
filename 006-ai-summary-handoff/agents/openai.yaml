@@ -1,4 +1,4 @@
 interface:
-  display_name: "AI 总结接力"
-  short_description: "将长会话压缩成可交接的结构化 Prompt"
+  display_name: "AI Handoff"
+  short_description: "Compress long context into an executable handoff prompt."
   default_prompt: "Use $ai-summary-handoff for this task."

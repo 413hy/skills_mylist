@@ -1,34 +1,32 @@
-# 学习内容精简总结 详细工作流
+# Concise Learning Summary Workflow
 
-## 目标
+## Goal
 
-用于把指定学习材料总结成够用、易懂、可吸收的版本。重点是先确认范围和读者水平，再提炼结构、核心观点、例子和易混点。
+Summarize learning material into a compact version that is easier to understand and retain. The skill prioritizes structure, plain language, key terms, examples, misconceptions, and a quick self-check.
 
-## 必须收集的信息
+## Information To Collect
 
-- 原文或材料位置、总结范围。
-- 用户水平、重点关注点、输出长度和风格。
-- 是否需要例子、对比表、知识地图、复习问题。
+- Source material, target learner level, desired length, and focus.
+- Must-keep sections, parts to skip, and preferred style.
+- Whether examples, analogies, questions, or exam notes are needed.
 
-## 标准流程
+## Standard Procedure
 
-1. 先确认主题、范围、读者水平和输出偏好。
-2. 提取核心结构和必要概念，删除次要细节。
-3. 用通俗语言解释关键点，并保留必要术语。
-4. 输出简明总结、易错点、例子和后续学习建议。
-5. 用一个小例题或复述检查验证总结是否足够清晰。
+1. Identify the source scope and the learner level.
+2. Extract the core structure before shortening details.
+3. Explain key terms in plain language.
+4. Keep essential examples and remove decorative or repeated material.
+5. Add misconceptions or traps when the topic commonly causes confusion.
+6. Use a small self-check scenario or question to verify understanding.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Return a concise summary, key terms, minimal example, common mistakes, and one or more self-check questions.

@@ -1,4 +1,4 @@
 interface:
-  display_name: "学习内容精简总结"
-  short_description: "把指定学习材料总结成精简易懂版本"
+  display_name: "Learning Summary"
+  short_description: "Summarize learning material clearly and compactly."
   default_prompt: "Use $learning-summary-lite for this task."

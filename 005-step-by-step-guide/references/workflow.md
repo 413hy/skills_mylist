@@ -1,34 +1,32 @@
-# 一步一步指导模式 详细工作流
+# Step-By-Step Guide Workflow
 
-## 目标
+## Goal
 
-用于把复杂任务变成一轮一个可执行动作。这个 skill 不追求一次性讲完，而是降低用户操作负担，通过反馈驱动下一步。
+Guide the user through a task one action at a time. This skill intentionally avoids dumping the full procedure when the next step depends on user feedback, logs, screenshots, or local observations.
 
-## 必须收集的信息
+## Information To Collect
 
-- 最终目标和当前状态。
-- 用户能操作的环境、工具和权限。
-- 每一步执行后能提供的反馈类型：截图、日志、命令输出、观察结果。
+- Final goal and current state.
+- User environment, tools, permissions, and comfort level.
+- What feedback the user can provide: output, screenshot, log, or observation.
 
-## 标准流程
+## Standard Procedure
 
-1. 确认目标和当前状态，只问最少必要问题。
-2. 每轮只给一个当前最该做的动作。
-3. 明确需要用户回传什么结果。
-4. 根据反馈判断是否符合预期；不符合时先定位最多 3 个可能原因。
-5. 继续给一个新的验证或修正步骤，直到目标达成。
+1. Confirm the immediate goal and any safety constraint in one short sentence if needed.
+2. Give exactly one executable next step.
+3. State exactly what output or observation the user should send back.
+4. Wait for the feedback before choosing the next step.
+5. When feedback arrives, decide whether it matches expectations and then provide the next single step.
+6. Do not provide long background explanations unless the user asks.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Each response should contain one step, the expected feedback, and at most a short reason when it helps execution.

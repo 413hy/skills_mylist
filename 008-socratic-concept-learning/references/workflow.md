@@ -1,34 +1,34 @@
-# 苏格拉底式概念学习 详细工作流
+# Socratic Concept Learning Workflow
 
-## 目标
+## Goal
 
-用于概念学习，不直接灌输长篇解释，而是通过全局框架、单点提问、用户回答、纠偏和总结，帮助用户自己想明白。
+Help the user build understanding instead of passively receiving a lecture. The skill uses small questions, hints, examples, misconception checks, and a final concise summary.
 
-## 必须收集的信息
+## Information To Collect
 
-- 概念集合、用户背景、学习目标。
-- 优先困惑点、应用场景、输出偏好。
-- 是否需要最后生成表格、口诀、例题或迁移练习。
+- Concept, user level, goal, and preferred language or analogy style.
+- Whether the user wants slow guidance, exam prep, or practical engineering understanding.
+- Any prior explanation or confusion point.
 
-## 标准流程
+## Standard Procedure
 
-1. 先给低术语密度的整体地图。
-2. 一次只问一个诊断性问题。
-3. 根据用户回答判断误区，给最小必要提示。
-4. 用类比或真实场景帮助迁移。
-5. 当理解接近稳定时，输出定义、区别、易错点和记忆总结。
+1. Name the target concept or concept set first, then start with a compact mental map.
+2. Ask one diagnostic question at a time.
+3. Use the user answer to choose the next hint, example, or correction.
+4. Avoid long lectures unless the user asks for a full explanation.
+5. Use one concrete scenario to test whether the concept transferred.
+6. End with a short summary, common traps, and a memory hook.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Provide one question or correction per turn, then a final concise concept map, examples, misconceptions, and self-check question.
+
+For the first turn, explicitly mention the target concept names before asking the first question. This keeps the Socratic prompt anchored even when the answer is intentionally short.

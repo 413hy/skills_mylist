@@ -1,34 +1,32 @@
-# 跨系统一致性对齐 详细工作流
+# Cross-System Alignment Workflow
 
-## 目标
+## Goal
 
-用于检查多个系统之间是否说的是同一件事：代码实现、需求文档、任务系统、设计稿、测试结果和外部同步系统。重点是找出差异、判断影响、给出修正顺序。
+Check whether multiple sources are saying the same thing: implementation, requirements, task tracker, tests, design files, and external systems. The skill finds gaps, ranks impact, and proposes a correction order.
 
-## 必须收集的信息
+## Information To Collect
 
-- 需要对齐的系统/文档/代码位置。
-- 权威来源优先级，例如需求文档优先还是线上行为优先。
-- 对齐范围、验收标准和不应修改的系统。
+- Systems, documents, code paths, and records to compare.
+- Authority order, such as production behavior, requirement document, or task tracker.
+- Alignment scope and systems that must not be changed.
 
-## 标准流程
+## Standard Procedure
 
-1. 列出所有来源和权威顺序。
-2. 逐项抽取需求、状态、字段、功能行为和验收标准。
-3. 建立差异表：来源 A、来源 B、差异、影响、建议权威值。
-4. 对涉及实际功能的差异执行场景验证，而不是只比较文字。
-5. 输出修正计划，区分立即修、需确认、可延期。
+1. Inventory every source to compare and record the authority order.
+2. Extract claims about behavior, status, ownership, dates, and acceptance criteria.
+3. Verify important behavioral claims through code inspection or realistic runtime checks when possible.
+4. Build a difference table with severity, evidence, affected users, and likely owner.
+5. Recommend a correction order and identify which system should be updated first.
+6. If changes are made, re-check the relevant source after correction.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Return an alignment matrix, evidence, severity, recommended corrections, owners, blockers, and unverified assumptions.

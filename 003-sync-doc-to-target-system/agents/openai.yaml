@@ -1,4 +1,4 @@
 interface:
-  display_name: "同步文档到系统"
-  short_description: "将文档、卡片或故事同步到目标系统"
+  display_name: "Document Sync"
+  short_description: "Sync docs or cards into a target system with evidence."
   default_prompt: "Use $sync-doc-to-target-system for this task."

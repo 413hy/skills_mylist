@@ -1,34 +1,32 @@
-# 通过目录理解整体思路 详细工作流
+# Directory Overview Workflow
 
-## 目标
+## Goal
 
-用于通过目录结构快速建立整体认知。重点是先判断模块边界、技术栈、入口、数据流和学习路径，再选择少量关键文件验证猜测。
+Build an initial map from a directory tree, then verify important inferences by sampling key files. The skill separates high-confidence observations from guesses.
 
-## 必须收集的信息
+## Information To Collect
 
-- 目录树、文件名列表、项目类型或目标问题。
-- 是否允许继续读取关键文件。
-- 用户关注：学习、改代码、排错、部署还是架构理解。
+- Directory tree or workspace path.
+- User goal: learning, modification, audit, onboarding, or planning.
+- Depth limit and areas of interest.
 
-## 标准流程
+## Standard Procedure
 
-1. 按目录和文件名推断项目类型、层次和关键入口。
-2. 标注高置信推断和低置信猜测。
-3. 给出建议阅读顺序和每一步目的。
-4. 抽查少量关键文件验证目录推断。
-5. 输出整体地图、模块说明、下一步阅读/修改建议。
+1. List the top-level directories and obvious entry points.
+2. Infer project type, modules, ownership boundaries, and likely runtime paths.
+3. Mark each inference as high, medium, or low confidence.
+4. Read a small number of key files to verify or correct the map.
+5. Explain recommended reading order and what each area likely controls.
+6. Avoid claiming behavior that was not verified.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Return a project map, confidence-labeled inferences, verified files, reading order, and questions that need deeper inspection.

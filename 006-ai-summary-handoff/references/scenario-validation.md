@@ -1,25 +1,25 @@
-# 真实场景自测规范
+# Scenario Validation
 
-## 核心原则
+## Core Principle
 
-交付最终产品、功能、代码、脚本、demo、Agent、同步结果或 PR 前，必须用用户真实会执行的操作样例自测。不能只验证接口、函数、命令或构建是否跑通。
+Before delivering a final product, feature, code change, script, demo, agent, synchronization result, pull request, or operational document, validate it with a realistic operation that a user or downstream system would actually perform. Do not stop at API, function, build, or command smoke tests.
 
-## 自测步骤
+## Validation Steps
 
-1. 列出本次交付的每个用户可见功能或业务流程。
-2. 为每个功能准备真实样例数据。需要账号时，优先使用项目已有测试账号；没有测试账号时，先创建/预留测试账号，或向用户说明缺口。
-3. 从用户入口执行完整流程，例如浏览器页面、CLI 命令、目标系统页面、Agent 对话或实际同步对象。
-4. 校验交互预期、数据变化、权限、错误提示、边界状态和刷新/重复操作后的状态。
-5. 记录证据：操作步骤、输入数据、期望结果、实际结果、日志/截图/链接/命令输出。
-6. 修复失败项并重新执行对应场景，直到通过或明确阻塞原因。
+1. List each user-visible function or business workflow included in the deliverable.
+2. Prepare realistic sample data. When an account is needed, use an existing project test account, reserve one, or report the missing account as a blocker.
+3. Execute the workflow from the normal entry point: browser page, CLI command, target-system object, agent conversation, or actual sync destination.
+4. Check interaction behavior, data changes, permissions, error messages, edge states, refresh behavior, and repeated operations where relevant.
+5. Record evidence: operation steps, input data, expected result, actual result, logs, screenshots, links, or command output.
+6. Fix failed items and rerun the corresponding scenario.
 
-## 本 skill 的自测例子
+## Skill-Specific Example
 
-示例：登录模块开发到一半。交接 Prompt 要包含已改文件、测试账号、当前登录流程缺陷、已跑过的测试、失败日志、下一步应先修哪个问题；不能只说“继续完善登录功能”。
+For a half-built login module, include changed files, test account status, failing route behavior, commands already run, expected login scenarios, and the next exact debugging task.
 
-## 交付时必须说明
+## Delivery Must Include
 
-- 使用了什么测试账号、测试数据或样例输入。
-- 覆盖了哪些正常流程、异常流程和边界流程。
-- 哪些功能未能自测，原因是什么，需要用户提供什么。
-- 如果只是静态文档类交付，也要用一个小样例验证它是否能指导真实执行。
+- Test account, sample data, or representative input used.
+- Normal, error, and boundary flows covered.
+- Functions that could not be tested, why they were blocked, and what is needed to test them.
+- For static documents, prompts, or plans, one small example proving the artifact can guide real execution.

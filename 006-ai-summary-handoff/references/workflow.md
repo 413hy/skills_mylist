@@ -1,34 +1,34 @@
-# AI 总结接力 详细工作流
+# AI Summary Handoff Workflow
 
-## 目标
+## Goal
 
-用于把长上下文压缩成新 AI 能接手的交接 Prompt。重点是保真、可执行、边界清晰，而不是泛泛总结。
+Turn a long or messy conversation into a concise handoff that another AI session can execute without rediscovering everything. The output must preserve decisions, current state, blockers, verification evidence, and next actions.
 
-## 必须收集的信息
+## Information To Collect
 
-- 当前任务目标、已完成内容、未完成内容。
-- 关键文件、命令、测试结果、用户偏好和禁止事项。
-- 下一位 AI 的平台或能力边界。
+- Original goal, current state, completed work, changed files, and decisions.
+- Known blockers, failed attempts, logs, credentials boundaries, and safety constraints.
+- Next session role, expected output, and validation requirements.
 
-## 标准流程
+## Standard Procedure
 
-1. 回溯当前会话，提炼事实、决策、约束、风险和待办。
-2. 删除寒暄和无效尝试，但保留影响结果的失败经验。
-3. 生成任务状态镜像、下一步计划、验收标准和必要上下文。
-4. 确保交接 Prompt 保留安全、隐私、授权和事实边界。
-5. 给出可直接复制的 Prompt，并说明它适合发给谁。
+1. Separate facts, assumptions, unresolved questions, and user preferences.
+2. Capture completed work and exact files, commands, links, or artifacts that matter.
+3. Capture failed attempts and why they failed, without burying them in prose.
+4. Write the handoff as an actionable prompt for the next session.
+5. Include validation duties and evidence requirements for any deliverable.
+6. Keep secrets out; mention that credentials must be obtained from the user or environment.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Produce a copy-ready handoff prompt plus a short checklist of known gaps, validation requirements, and risks.
+
+Use explicit sections when possible: Handoff Prompt, Known Facts, Assumptions, Next Task, Validation Duties, Do Not Do, Remaining Risks. The next session should be able to paste the prompt and start work without rereading the original conversation.

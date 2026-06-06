@@ -1,4 +1,4 @@
 interface:
-  display_name: "通过目录看思路"
-  short_description: "通过目录和文件名快速建立整体认知"
+  display_name: "Directory Overview"
+  short_description: "Infer project structure from directories, then verify."
   default_prompt: "Use $directory-overview for this task."

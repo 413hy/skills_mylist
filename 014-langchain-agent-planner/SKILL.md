@@ -3,49 +3,49 @@ name: langchain-agent-planner
 description: 'Use before designing or implementing a LangChain Agent: clarify task, tools, memory, inputs, outputs, failure handling, evaluation cases, and scenario validation.'
 ---
 
-# LangChain Agent 规划
+# LangChain Agent Planner
 
 ## Overview
 
-用于正式编写 LangChain Agent 前的需求澄清和架构规划。重点是先明确 agent 为什么需要工具、怎样调用、如何失败恢复、如何评估。
+Plan a LangChain Agent before building it. The skill decides whether an agent is justified, defines tools, memory, schemas, guardrails, failure handling, and evaluation scenarios.
 
-## Trigger
+## Use This Skill When
 
-- 用户要创建 LangChain Agent。
-- 用户有工具调用、RAG、Memory、结构化输出或多步骤推理需求。
-- 需求还停留在“做个 agent”层面，需要澄清。
+- User asks to create or design a LangChain Agent.
+- A workflow may need tool use, retrieval, memory, or structured output.
+- Agent behavior needs to be evaluated before implementation.
 
 ## Required Inputs
 
-- 业务目标、用户输入、期望输出。
-- 可用工具/API、数据源、鉴权、Memory 策略。
-- 失败处理、延迟预算、评估样例和部署环境。
+- Task goal, users, available tools, data sources, and constraints.
+- Input/output schema, memory requirements, permissions, and failure behavior.
+- Representative user queries and expected outcomes.
 
 ## Required Workflow
 
-1. Start with context discovery. Read the relevant files, docs, tickets, current workspace state, or user-provided material before acting.
-2. Produce a short requirement mirror when the task has ambiguity, risk, or implementation impact.
-3. Follow `references/operating-contract.md` for hard rules, interaction discipline, failure handling, and evidence standards.
-4. Follow the detailed procedure in `references/workflow.md`.
-5. If the work creates or changes a product, feature, script, demo, Agent, synchronization result, PR, or other final deliverable, apply the scenario validation gate in `references/scenario-validation.md` before delivery.
-6. Preserve the original migrated prompt only as historical reference in `references/original-prompt.md`; current environment rules and the optimized workflow here take priority.
+1. Start with context discovery. Read relevant files, docs, tickets, workspace state, or user-provided material before acting.
+2. Produce a short requirement mirror when ambiguity, risk, or implementation impact exists.
+3. Follow `references/operating-contract.md` for hard rules, failure handling, and evidence standards.
+4. Follow `references/workflow.md` for the task-specific procedure.
+5. If the work creates or changes a product, feature, script, demo, agent, synchronization result, pull request, or other final deliverable, apply `references/scenario-validation.md` before delivery.
+6. Treat `references/original-prompt.md` only as migration history. The current SKILL.md and references take priority.
 
 ## Scenario Validation Gate
 
-Before saying the work is done, validate each user-facing function with a realistic operation. For example, if a delivered system contains account login, use a real or reserved test account to log in through the normal UI, verify successful login, failed login, session behavior, logout, and protected-route access. Do not replace this with a bare API smoke test.
+Before saying the work is done, validate each user-facing function or operational deliverable with a realistic operation. If a delivered system contains account login, use a real or reserved test account through the normal UI and verify successful login, failed login, session behavior, logout, and protected-route access. Do not replace this with a bare API smoke test.
 
-For non-code deliverables, run a representative sample through the document or workflow. A User Story, handoff prompt, architecture plan, or learning summary is only complete after a small example proves that the next person can act on it.
+For non-code deliverables, run a representative sample through the document, plan, or workflow. A User Story, handoff prompt, architecture plan, or learning summary is only complete after a small example proves the next person can act on it.
 
 ## Output Contract
 
 - State what was produced or changed.
-- List the scenario tests performed with inputs, expected results, actual results, and pass/fail status.
+- List scenario tests with inputs, expected results, actual results, evidence, and pass/fail status.
 - Call out any functionality that could not be scenario-tested and why.
 - Keep unrelated refactors, unrelated documentation, and unsupported assumptions out of scope.
 
 ## References
 
 - `references/operating-contract.md` for hard rules, failure handling, and evidence standards.
-- `references/workflow.md` for the full operating procedure.
+- `references/workflow.md` for the full task-specific procedure.
 - `references/scenario-validation.md` for realistic self-test requirements and examples.
-- `references/original-prompt.md` for the source prompt migrated from the old collection.
+- `references/original-prompt.md` for the legacy source prompt only.

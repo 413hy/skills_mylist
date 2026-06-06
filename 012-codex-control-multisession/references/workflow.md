@@ -1,34 +1,32 @@
-# Codex 多会话总控 详细工作流
+# Codex Control Multi-Session Workflow
 
-## 目标
+## Goal
 
-用于让一个总控会话只负责需求澄清、上下文压缩、任务拆分和多 session 交接。重点是避免每个 session 乱做，明确边界、产出和验收。
+Use one control session to clarify requirements, maintain state, split work into numbered sessions, and produce paste-ready handoffs. The control session routes work; each worker session owns implementation and evidence.
 
-## 必须收集的信息
+## Information To Collect
 
-- 总体目标、当前上下文、可拆分模块。
-- 每个 session 的职责、输入资料、输出物和禁止事项。
-- 集成顺序、验收标准和场景自测要求。
+- Overall goal, current state, constraints, repositories, systems, and priority.
+- Which sessions exist or should be created.
+- Expected outputs, validation evidence, and state anchor format.
 
-## 标准流程
+## Standard Procedure
 
-1. 先澄清总目标和边界，形成需求镜像。
-2. 判断是否需要拆 session，不需要时说明理由。
-3. 生成 session_1、session_2 等手工交接 Prompt。
-4. 每个 session 都必须包含输入、任务、交付物、真实场景自测和回传格式。
-5. 维护总控状态锚点，接收各 session 结果后做集成对齐。
+1. Clarify the overall requirement and write a requirement mirror.
+2. Define session roles, ownership boundaries, inputs, outputs, and forbidden overlap.
+3. Generate numbered handoff prompts for each session.
+4. Require each session to return changed files, decisions, blockers, tests, and scenario evidence.
+5. Maintain a state anchor that can be pasted into future turns.
+6. Reconcile returned evidence before declaring the overall work complete.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Provide session handoff prompts, state anchor, ownership map, validation duties, and integration checklist.

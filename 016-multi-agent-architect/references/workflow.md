@@ -1,34 +1,32 @@
-# 多 Agent 架构师 详细工作流
+# Multi-Agent Architect Workflow
 
-## 目标
+## Goal
 
-用于多 Agent 系统架构设计。重点是先判断是否真的需要多 Agent，再设计角色、通信协议、调度、状态、权限和评估方式。
+Design a multi-agent system only when multiple agents are justified. The skill compares simpler alternatives, then defines roles, permissions, communication, orchestration, memory, evaluation, and realistic collaboration tests.
 
-## 必须收集的信息
+## Information To Collect
 
-- 业务目标、参与角色、任务边界。
-- 通信方式、共享状态、工具权限和调度策略。
-- 冲突处理、评估样例、成本/延迟约束和失败恢复。
+- Business goal, user workflows, candidate agent roles, tools, data, and permissions.
+- Constraints on latency, cost, safety, ownership, and observability.
+- Representative collaboration scenarios and failure cases.
 
-## 标准流程
+## Standard Procedure
 
-1. 先判断单 Agent、工作流、规则系统是否足够；不够再多 Agent。
-2. 定义每个 Agent 的职责、输入、输出、工具权限和禁止事项。
-3. 设计通信协议、共享记忆、调度者和终止条件。
-4. 识别争用、循环、幻觉放大、成本和安全风险。
-5. 用真实任务剧本模拟多 Agent 协作，验证输出质量和边界。
+1. First decide whether a single agent or normal workflow is sufficient.
+2. If multiple agents are justified, define each role, responsibilities, tools, permissions, and non-goals.
+3. Define communication contracts, shared state, memory boundaries, orchestration, and escalation.
+4. Identify conflict resolution, routing errors, duplicate work, and runaway-loop risks.
+5. Create collaboration scenario tests before implementation.
+6. Validate agent handoffs and final answer quality with realistic cases.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Provide justification, role map, communication contracts, orchestration plan, memory policy, scenario tests, risks, and implementation roadmap.

@@ -1,4 +1,4 @@
 interface:
-  display_name: "Codex 多会话总控"
-  short_description: "总控会话拆分任务并生成多 session 交接"
+  display_name: "Multi-Session Control"
+  short_description: "Route complex work across numbered Codex sessions."
   default_prompt: "Use $codex-control-multisession for this task."

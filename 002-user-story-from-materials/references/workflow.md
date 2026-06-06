@@ -1,34 +1,32 @@
-# 基于材料生成 User Story 详细工作流
+# User Story From Existing Materials Workflow
 
-## 目标
+## Goal
 
-用于把零散材料整理成可以进入交付流程的 User Story。重点是提炼用户目标、业务价值、验收标准、边界和待确认问题，而不是把原文改写成更漂亮的段落。
+Convert rough source material into a User Story that product, engineering, and QA can act on. The skill extracts intent, value, boundaries, acceptance criteria, examples, and open questions instead of merely rewriting the source text.
 
-## 必须收集的信息
+## Information To Collect
 
-- 材料来源、目标系统格式、用户角色、业务目标。
-- 已知范围、明确排除项、依赖、风险和截止时间。
-- 目标读者：产品、开发、QA、外部客户或任务系统。
+- Source material and target format.
+- User role, business goal, known scope, exclusions, dependencies, and deadlines.
+- Target reader: product, engineering, QA, external customer, or task system.
 
-## 标准流程
+## Standard Procedure
 
-1. 读取全部材料，标记事实、假设、冲突和缺口。
-2. 提炼角色、目标、价值、主流程、异常流程和约束。
-3. 生成 User Story 正文、Acceptance Criteria、Out of Scope、Dependencies、Open Questions。
-4. 为每条验收标准补一个可执行的场景验证样例。
-5. 自检故事是否可开发、可测试、无含糊词，并列出仍需用户确认的问题。
+1. Read all provided material and identify facts, assumptions, missing details, and contradictions.
+2. Mirror the inferred requirement when ambiguity could change scope.
+3. Write the story with role, goal, value, scope, non-goals, assumptions, dependencies, and risks.
+4. Create acceptance criteria that cover happy path, error path, boundary cases, permissions, and data states.
+5. Attach validation examples that a QA or developer can actually run.
+6. List open questions separately instead of hiding them in acceptance criteria.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Deliver a structured User Story, acceptance criteria, example tests, assumptions, exclusions, dependencies, and unresolved questions.

@@ -1,34 +1,32 @@
-# 同步文档到目标系统 详细工作流
+# Sync Document To Target System Workflow
 
-## 目标
+## Goal
 
-用于把指定内容同步到目标系统，例如 Jira、Linear、Notion、飞书、Confluence 或项目内部系统。重点是字段准确、状态一致、链接可追踪，并在同步后验证目标系统中实际可用。
+Move or update a document, task, card, requirement, or story in a target system without losing meaning. The key requirement is post-sync verification of the target object, not just a successful API response.
 
-## 必须收集的信息
+## Information To Collect
 
-- 源文档位置、目标系统、目标空间/项目/表/库。
-- 字段映射、权限、目标对象是否新建或更新。
-- 同步后需要验证的关键字段和可接受差异。
+- Source object, target system, target project or space, and field mapping.
+- Authority rules for conflicting fields.
+- Credentials or connector access, sync scope, and fields that must not be changed.
 
-## 标准流程
+## Standard Procedure
 
-1. 读取源内容并提取结构化字段。
-2. 确认目标系统位置和字段映射，不确定时先列出映射建议。
-3. 执行同步或生成精确操作清单。
-4. 打开或查询目标对象，逐项验证标题、正文、状态、负责人、标签、链接、附件。
-5. 给出同步结果、目标链接、差异清单和后续处理项。
+1. Extract source fields, links, attachments, ownership, status, and acceptance criteria.
+2. Map each source field to the target system and flag unsupported fields before writing.
+3. Perform the sync or prepare exact sync instructions if credentials are missing.
+4. Read back the target object after sync.
+5. Compare source and target field by field, including links and attachments when available.
+6. Report target links, mismatches, skipped fields, and required follow-up.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Provide source-to-target mapping, target object link or id, verification table, mismatches, skipped fields, and next actions.

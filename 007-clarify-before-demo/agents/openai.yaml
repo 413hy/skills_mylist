@@ -1,4 +1,4 @@
 interface:
-  display_name: "先提问再做 Demo"
-  short_description: "先澄清需求再生成完整可运行 Demo"
+  display_name: "Clarify Demo"
+  short_description: "Clarify requirements before building a runnable demo."
   default_prompt: "Use $clarify-before-demo for this task."

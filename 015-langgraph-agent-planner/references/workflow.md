@@ -1,34 +1,32 @@
-# LangGraph Agent 规划 详细工作流
+# LangGraph Agent Planner Workflow
 
-## 目标
+## Goal
 
-用于 LangGraph Agent / 工作流图设计前的需求澄清。重点是状态、节点职责、边条件、循环退出、人工中断和可恢复执行。
+Plan a LangGraph workflow by defining state, nodes, edges, loops, interrupts, persistence, recovery, and tests before implementation. The skill focuses on graph behavior, not only node functions.
 
-## 必须收集的信息
+## Information To Collect
 
-- 业务流程、状态字段、节点职责。
-- 边条件、循环退出条件、错误恢复和持久化需求。
-- 测试样例、输入输出、人工介入点和验收标准。
+- Workflow goal, state fields, actors, tools, and persistence needs.
+- Branching rules, loop limits, interrupts, and recovery expectations.
+- Representative full-path scenarios.
 
-## 标准流程
+## Standard Procedure
 
-1. 确认是否需要 LangGraph，而不是普通链或简单函数。
-2. 定义 State schema、节点、边、条件和终止状态。
-3. 识别死循环、状态膨胀、并发和恢复风险。
-4. 设计最小可运行图和评估用例。
-5. 用真实流程样例跑完整路径、失败路径和人工中断路径。
+1. Decide whether LangGraph is justified compared with a simple chain or workflow.
+2. Define State schema, nodes, edges, conditional routing, terminal states, and loop guards.
+3. Specify interrupts, persistence, resume behavior, and failure recovery.
+4. Create full-path scenario tests before implementation.
+5. If implementation is requested, build nodes and graph according to the plan.
+6. Validate complete graph paths, including rejection, retry, and interruption paths.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Provide graph design, state schema, node contracts, edge conditions, recovery plan, scenario tests, and implementation notes if applicable.

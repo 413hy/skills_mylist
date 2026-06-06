@@ -1,34 +1,32 @@
-# 从零编写油猴脚本 详细工作流
+# Tampermonkey Script From Scratch Workflow
 
-## 目标
+## Goal
 
-用于从零设计和编写 Tampermonkey 脚本。重点是先理解目标网页和实际用户动作，再写脚本、安装验证、修复选择器和交互问题。
+Create a Tampermonkey userscript from real page behavior. The skill covers page analysis, match rules, permissions, selectors, injection timing, persistence, error handling, installation, and browser validation.
 
-## 必须收集的信息
+## Information To Collect
 
-- 目标 URL、页面截图/HTML、用户手动操作流程。
-- 脚本要完成的动作、触发方式、保存数据、权限范围。
-- 测试账号、测试页面和可接受的失败处理。
+- Target URL patterns, manual workflow, desired automation, and allowed permissions.
+- Page HTML or access to the page, selectors, dynamic loading behavior, and login requirements.
+- Persistence requirements, safety constraints, and validation steps.
 
-## 标准流程
+## Standard Procedure
 
-1. 分析目标页面结构和用户手动流程。
-2. 设计 @match、权限、注入时机、选择器策略和回退方案。
-3. 实现脚本并说明安装位置。
-4. 在真实页面或本地复刻页面安装运行，执行用户实际会做的操作。
-5. 修复选择器失效、加载时序、权限、重复注入和错误提示问题。
+1. Understand the manual workflow and what should trigger the script.
+2. Inspect the real page or representative HTML before choosing selectors.
+3. Define @match, permissions, storage needs, and injection timing.
+4. Implement the script with defensive selectors, idempotency, and user-visible fallback behavior.
+5. Install or simulate installation in Tampermonkey.
+6. Validate on the target page with realistic operations and fix selector/timing failures.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Provide the userscript, installation steps, scenario-test evidence, limitations, and selectors or assumptions that may need maintenance.

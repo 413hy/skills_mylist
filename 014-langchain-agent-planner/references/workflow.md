@@ -1,34 +1,32 @@
-# LangChain Agent 规划 详细工作流
+# LangChain Agent Planner Workflow
 
-## 目标
+## Goal
 
-用于正式编写 LangChain Agent 前的需求澄清和架构规划。重点是先明确 agent 为什么需要工具、怎样调用、如何失败恢复、如何评估。
+Plan a LangChain Agent before building it. The skill decides whether an agent is justified, defines tools, memory, schemas, guardrails, failure handling, and evaluation scenarios.
 
-## 必须收集的信息
+## Information To Collect
 
-- 业务目标、用户输入、期望输出。
-- 可用工具/API、数据源、鉴权、Memory 策略。
-- 失败处理、延迟预算、评估样例和部署环境。
+- Task goal, users, available tools, data sources, and constraints.
+- Input/output schema, memory requirements, permissions, and failure behavior.
+- Representative user queries and expected outcomes.
 
-## 标准流程
+## Standard Procedure
 
-1. 先澄清 agent 的业务闭环和是否真的需要 LangChain Agent。
-2. 定义工具清单、输入输出 schema、Memory 和执行边界。
-3. 设计错误处理、观测日志、人工接管和安全边界。
-4. 给出实现计划和评估用例。
-5. 用至少一个真实业务样例跑 agent 预期流程，验证工具选择和输出是否符合需求。
+1. Decide whether a LangChain Agent is necessary or a simpler workflow is enough.
+2. Define tool list, tool contracts, retrieval sources, memory policy, and output schema.
+3. Specify guardrails, escalation behavior, and observability requirements.
+4. Create representative evaluation cases before implementation.
+5. If implementation is requested, build the smallest agent that satisfies the plan.
+6. Run scenario tests against realistic queries and failure cases.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Provide architecture plan, tool contracts, memory policy, schemas, evaluation cases, scenario-test plan, and implementation notes if applicable.

@@ -1,35 +1,32 @@
-# 先理解代码后完成需求 详细工作流
+# Understand Code Before Change Workflow
 
-## 目标
+## Goal
 
-用于已有代码库中的需求实现。重点是先理解结构、调用链、数据流和测试方式，再改代码；交付前必须用真实功能场景验证。
+Make changes in an existing codebase only after understanding the relevant architecture, data flow, conventions, and tests. The skill prevents blind edits and requires realistic validation of changed behavior.
 
-## 必须收集的信息
+## Information To Collect
 
-- 需求描述、相关文件/模块、预期行为。
-- 运行方式、测试命令、测试数据、账号和环境变量。
-- 禁止改动范围、兼容性要求和验收标准。
+- Requested change, target behavior, relevant files or modules, and acceptance criteria.
+- Repository patterns, test commands, run commands, and protected areas.
+- Sample data, test accounts, and user workflows needed for validation.
 
-## 标准流程
+## Standard Procedure
 
-1. 先搜索并阅读相关入口、调用链、测试和文档。
-2. 总结当前实现和需求差距，不确定先问。
-3. 做最小范围改动，遵循项目现有风格。
-4. 运行静态检查和自动化测试。
-5. 按用户实际路径做场景自测，覆盖成功、失败、边界和权限状态。
-6. 整理变更、验证结果和剩余风险。
+1. Inspect the directory, relevant files, imports, routes, data models, and existing tests before editing.
+2. Summarize the current behavior and the intended change.
+3. Choose the smallest change that fits existing patterns.
+4. Edit only the necessary files.
+5. Run relevant tests and build checks.
+6. Validate the changed user-facing workflow with realistic operations, then report evidence.
 
-## 质量门槛
+## Quality Gates
 
-- 先区分事实、假设和待确认问题；不能把猜测写成结论。
-- 每次实施前都要明确本轮范围和不做什么。
-- 交付物要能被用户或下游系统直接使用；如果还需要用户补信息，必须明确缺口。
-- 涉及代码、脚本、demo、同步、自动化、Agent、PR 或可操作文档时，必须执行 `references/scenario-validation.md` 的真实场景自测门槛。
-- 失败项必须修复后复测；不能用“接口通了”“命令没报错”替代真实使用验证。
+- Separate facts, assumptions, and open questions.
+- Keep the implementation or document scope explicit.
+- Prefer existing project patterns, field names, test data, and connector conventions.
+- Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
+- Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
 
-## 输出格式
+## Output Shape
 
-- 理解镜像：目标、范围、关键约束、待确认问题。
-- 执行结果：完成了什么、改了哪里、生成了什么。
-- 场景自测：覆盖的真实操作、测试数据/账号、期望、实际、证据、结论。
-- 风险与后续：未覆盖项、依赖用户确认项、建议下一步。
+Report code understanding, files changed, test results, scenario validation, unresolved risks, and any follow-up needed.

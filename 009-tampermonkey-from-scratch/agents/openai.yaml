@@ -1,4 +1,4 @@
 interface:
-  display_name: "从零写油猴脚本"
-  short_description: "从目标网页和流程出发设计油猴脚本"
+  display_name: "Tampermonkey Builder"
+  short_description: "Design, implement, and browser-test a userscript."
   default_prompt: "Use $tampermonkey-from-scratch for this task."
