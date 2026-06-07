@@ -94,3 +94,15 @@
 `001-016` 已完成安装、结构校验、哈希比对和 48 个前向真实调用用例验证。
 
 本轮验证中发现的问题已经修复，并重新安装、重新校验、重新测试通过。当前这些自建 skills 的结构、触发行为、输出约束和交付前验证要求符合长期使用要求。
+
+## 2026-06-07 追加：012 聚焦验证
+
+针对 `012-codex-control-multisession` 追加了需求总控场景验证，重点验证：
+
+- 当前窗口是否能稳定成为 `session_0` 需求窗口。
+- 需求不清楚时是否继续提问且不拆 session。
+- 需求清楚时是否在目标项目创建 `docs/codex-sessions/tasks/session_n-task.md`。
+- 是否可以让用户只把任务文档路径发给新窗口，而不是复制长 prompt。
+- 每个 worker session 是否被要求先做 `Agent Need Assessment`，复杂任务默认自主创建 agents 协作。
+
+详细记录见 `012_FOCUSED_VALIDATION_REPORT.md`。

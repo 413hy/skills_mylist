@@ -1,25 +1,49 @@
 ---
 name: codex-control-multisession
-description: 'Use when one Codex control session should clarify requirements, maintain a state anchor, split work into numbered sessions, and generate handoff prompts with validation duties.'
+description: 'Use when the current Codex window should become session_0, a requirements/control window that clarifies the user need, inspects project context, avoids direct implementation, maintains a state anchor, then routes confirmed work into numbered Codex sessions using project task files, delivery document paths, agent/skill delegation rules, and validation duties.'
 ---
 
 # Codex Control Multi-Session
 
 ## Overview
 
-Use one control session to clarify requirements, maintain state, split work into numbered sessions, and produce paste-ready handoffs. The control session routes work; each worker session owns implementation and evidence.
+Use the current window as `session_0`, a requirements and control window. `session_0` clarifies the user need, reads project context when useful, maintains state, splits confirmed work into numbered sessions, and writes project task files that the user can point new windows at. Worker sessions own implementation, agent orchestration, skill usage, delivery documents, and evidence.
 
 ## Use This Skill When
 
 - User wants a main Codex window to coordinate other sessions.
+- User wants a requirements window that understands the project before routing work.
 - A task is too broad for one context and needs manual session splitting.
-- The user wants session_0, session_1, etc. with explicit roles and handoffs.
+- The user wants `session_0`, `session_1`, etc. with explicit roles, task files, progress documents, agents, skills, and validation evidence.
 
 ## Required Inputs
 
 - Overall goal, current state, constraints, repositories, systems, and priority.
 - Which sessions exist or should be created.
 - Expected outputs, validation evidence, and state anchor format.
+
+## Session 0 Rules
+
+- Treat the current window as `session_0`.
+- `session_0` may read project files, docs, tickets, tests, and architecture to understand unclear requirements.
+- `session_0` may use read-only analysis agents if that helps requirement understanding, but must not use implementation agents and must not directly edit product code for the requested feature.
+- If the requirement is unclear, ask focused clarification questions and do not split worker sessions yet.
+- After the requirement is clear, produce a requirement mirror and a draft session plan for the user to approve or adjust.
+- After the session plan is approved or clearly implied by the user, write task files at `docs/codex-sessions/tasks/session_n-task.md`.
+- Give the user a short launch instruction for each new window, for example: `Open session_1 and tell it: read docs/codex-sessions/tasks/session_1-task.md and execute it.`
+- If file writing is not appropriate or unavailable, fall back to paste-ready prompts named `session_1`, `session_2`, etc.
+- Maintain the control state at `docs/codex-sessions/session_0-state.md` when writing files is appropriate.
+
+## Worker Session Rules
+
+- Every worker session must start from its task file: `docs/codex-sessions/tasks/session_n-task.md`.
+- Every worker session prompt must specify a delivery document path: `docs/codex-sessions/session_n-delivery.md`.
+- Each worker session must perform an `Agent Need Assessment` before implementation.
+- For complex, cross-file, multi-workflow, risky, or validation-heavy tasks, the default is to create at least one narrowly scoped agent unless the session explicitly justifies why agents are unnecessary.
+- If agents are useful, the worker session must create narrowly scoped agents with explicit ownership and integration rules.
+- Agents may call existing skills when their task matches a skill trigger.
+- A worker session may create project-local child skills only when the workflow is reusable across sessions or agents. It must document the skill path, trigger, owner, and validation evidence in its delivery document.
+- Worker sessions must report the `Agent Need Assessment`, agents used or why none were used, changed files, decisions, skills called, child skills created, tests, realistic scenario evidence, blockers, and next handoff needs.
 
 ## Required Workflow
 
@@ -38,14 +62,17 @@ For non-code deliverables, run a representative sample through the document, pla
 
 ## Output Contract
 
-- State what was produced or changed.
-- List scenario tests with inputs, expected results, actual results, evidence, and pass/fail status.
-- Call out any functionality that could not be scenario-tested and why.
-- Keep unrelated refactors, unrelated documentation, and unsupported assumptions out of scope.
+- State whether the requirement is still being clarified or ready for session planning.
+- When unclear, ask only the next focused clarification questions and do not assign implementation work.
+- When clear, provide a requirement mirror, ownership map, created `session_n` task file paths, one-line launch instructions, delivery document paths, validation duties, integration checklist, and `session_0` state anchor.
+- Prefer task files over long pasted prompts. Use paste-ready prompts only as a fallback when task files cannot be written.
+- Require every worker session to write or update `docs/codex-sessions/session_n-delivery.md`.
+- Call out unresolved assumptions, blocked sessions, and evidence that `session_0` must inspect before declaring the overall work complete.
 
 ## References
 
 - `references/operating-contract.md` for hard rules, failure handling, and evidence standards.
 - `references/workflow.md` for the full task-specific procedure.
+- `references/session-task-template.md` when writing `docs/codex-sessions/tasks/session_n-task.md` files.
 - `references/scenario-validation.md` for realistic self-test requirements and examples.
 - `references/original-prompt.md` for the legacy source prompt only.

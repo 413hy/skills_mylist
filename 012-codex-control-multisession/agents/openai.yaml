@@ -1,4 +1,4 @@
 interface:
   display_name: "Multi-Session Control"
-  short_description: "Route complex work across numbered Codex sessions."
-  default_prompt: "Use $codex-control-multisession for this task."
+  short_description: "Turn this window into session_0 and route confirmed work."
+  default_prompt: "Use $codex-control-multisession as session_0."

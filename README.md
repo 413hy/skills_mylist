@@ -22,7 +22,7 @@
 
 自建 skills 已统一加入真实场景自测门槛：凡是交付代码、demo、脚本、Agent、PR、同步结果或最终产品功能，都必须用用户真实会执行的操作样例验证。比如登录功能必须用测试账号从正常入口登录、验证错误密码、会话保持、退出登录和受保护页面访问，不能只测登录接口是否 200。
 
-逐个 skill 的代表性 dry-run 自测记录见 `SELF_TEST_REPORT.md`。逐个 skill 的调用式输入/输出模拟记录见 `CALL_SIMULATION_REPORT.md`。安装到 Codex skills 目录并通过新 `codex exec` 进程重载触发的验证记录见 `INSTALLATION_VALIDATION_REPORT.md`。最终 16 个 skill × 3 个实际调用用例的前向验证记录见 `FORWARD_USAGE_VALIDATION_REPORT.md`。
+逐个 skill 的代表性 dry-run 自测记录见 `SELF_TEST_REPORT.md`。逐个 skill 的调用式输入/输出模拟记录见 `CALL_SIMULATION_REPORT.md`。安装到 Codex skills 目录并通过新 `codex exec` 进程重载触发的验证记录见 `INSTALLATION_VALIDATION_REPORT.md`。最终 16 个 skill × 3 个实际调用用例的前向验证记录见 `FORWARD_USAGE_VALIDATION_REPORT.md`。`012-codex-control-multisession` 的需求总控、文件式任务分发和 Agent Need Assessment 聚焦验证见 `012_FOCUSED_VALIDATION_REPORT.md`。
 
 ## 目录
 
