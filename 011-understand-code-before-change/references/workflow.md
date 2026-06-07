@@ -29,4 +29,4 @@ Make changes in an existing codebase only after understanding the relevant archi
 
 ## Output Shape
 
-Report code understanding, files changed, test results, scenario validation, unresolved risks, and any follow-up needed.
+Report the before-editing code understanding, files changed, test results, scenario validation, unresolved risks, and any follow-up needed. If no edit is possible, still label the before-editing inspection path and blocker.

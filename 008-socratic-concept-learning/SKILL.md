@@ -30,6 +30,15 @@ Help the user build understanding instead of passively receiving a lecture. The 
 5. If the work creates or changes a product, feature, script, demo, agent, synchronization result, pull request, or other final deliverable, apply `references/scenario-validation.md` before delivery.
 6. Treat `references/original-prompt.md` only as migration history. The current SKILL.md and references take priority.
 
+## Socratic Response Rules
+
+- In the first reply, explicitly name the target concept or concept set before asking the first question.
+- Ask only one diagnostic question at a time.
+- Keep early-turn replies compact: target concept, one short prompt, and one short hint. In the first reply, do not use fenced code blocks; use inline code or one single-line example instead.
+- Keep the hint short enough that the user still has to reason.
+- For misconception correction, explicitly mark the claim as incomplete or not the same thing, using clear wording such as `不完全`, `不等于`, `not identical`, or `not the same as`, then ask the next question. Do not dump the full correction immediately.
+- End only when the user has worked through the idea or asks for a direct summary.
+
 ## Scenario Validation Gate
 
 Before saying the work is done, validate each user-facing function or operational deliverable with a realistic operation. If a delivered system contains account login, use a real or reserved test account through the normal UI and verify successful login, failed login, session behavior, logout, and protected-route access. Do not replace this with a bare API smoke test.

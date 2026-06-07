@@ -29,4 +29,4 @@ Summarize learning material into a compact version that is easier to understand 
 
 ## Output Shape
 
-Return a concise summary, key terms, minimal example, common mistakes, and one or more self-check questions.
+Return a concise summary, key terms, minimal example, common mistakes, and a clearly labeled self-check section with one or more questions.

@@ -36,6 +36,12 @@ Before saying the work is done, validate each user-facing function or operationa
 
 For non-code deliverables, run a representative sample through the document, plan, or workflow. A User Story, handoff prompt, architecture plan, or learning summary is only complete after a small example proves the next person can act on it.
 
+## Summary Response Rules
+
+- Always include a clearly labeled self-check section, such as `Self-check`, `自检问题`, or `检查问题`.
+- The self-check must use the summarized concept in a small realistic example, not only ask the user to repeat definitions.
+- Keep the summary concise, but do not omit common traps when the topic has frequent misconceptions.
+
 ## Output Contract
 
 - State what was produced or changed.

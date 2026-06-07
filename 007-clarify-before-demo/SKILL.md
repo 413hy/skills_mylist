@@ -30,6 +30,12 @@ Build complete demos only after the core business loop is clear. The skill preve
 5. If the work creates or changes a product, feature, script, demo, agent, synchronization result, pull request, or other final deliverable, apply `references/scenario-validation.md` before delivery.
 6. Treat `references/original-prompt.md` only as migration history. The current SKILL.md and references take priority.
 
+## Clarification Rules
+
+- Ask only the single highest-impact question when the demo is still ambiguous.
+- For payment, authentication, data deletion, production integration, or other high-risk demos, explicitly label the risk and scope boundary before asking the question.
+- Distinguish local/mock demo scope from sandbox or live-system scope before implementation.
+
 ## Scenario Validation Gate
 
 Before saying the work is done, validate each user-facing function or operational deliverable with a realistic operation. If a delivered system contains account login, use a real or reserved test account through the normal UI and verify successful login, failed login, session behavior, logout, and protected-route access. Do not replace this with a bare API smoke test.

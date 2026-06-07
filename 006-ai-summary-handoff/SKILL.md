@@ -43,6 +43,8 @@ For non-code deliverables, run a representative sample through the document, pla
 - Call out any functionality that could not be scenario-tested and why.
 - Keep unrelated refactors, unrelated documentation, and unsupported assumptions out of scope.
 
+For the handoff itself, use stable sections whenever possible: `Handoff Prompt`, `Known Facts`, `Assumptions`, `Next Task`, `Validation Duties`, `Do Not Do`, and `Remaining Risks`. If there are no extra assumptions, write that explicitly instead of omitting the section.
+
 ## References
 
 - `references/operating-contract.md` for hard rules, failure handling, and evidence standards.

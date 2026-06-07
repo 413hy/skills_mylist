@@ -23,6 +23,8 @@ Help the user build understanding instead of passively receiving a lecture. The 
 
 - Separate facts, assumptions, and open questions.
 - Keep the implementation or document scope explicit.
+- In early turns, keep the response compact enough for the user to answer immediately. In the first reply, avoid fenced code blocks; use inline code or one single-line example unless the user explicitly asks for code.
+- When correcting a misconception, explicitly say the idea is incomplete or not equivalent before guiding the user to test it.
 - Prefer existing project patterns, field names, test data, and connector conventions.
 - Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
 - Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.

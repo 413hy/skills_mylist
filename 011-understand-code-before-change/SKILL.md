@@ -36,6 +36,12 @@ Before saying the work is done, validate each user-facing function or operationa
 
 For non-code deliverables, run a representative sample through the document, plan, or workflow. A User Story, handoff prompt, architecture plan, or learning summary is only complete after a small example proves the next person can act on it.
 
+## Code Understanding Gate
+
+- Before editing, explicitly state that the first step is to understand the relevant code path, architecture, data flow, and tests.
+- Include a clearly labeled section such as `Before editing`, `动手前先理解`, or `先理解代码路径`.
+- If the current workspace is not the target app, say that as a blocker and provide the code paths to inspect in the real app instead of pretending to edit.
+
 ## Output Contract
 
 - State what was produced or changed.

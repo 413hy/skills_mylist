@@ -5,7 +5,7 @@
 - Understand the user goal before acting. Do not silently expand a short request into a larger scope.
 - Prefer facts from local files, code, docs, tickets, or user-provided material before asking for missing information.
 - Before implementation, define the current objective, deliverable, out-of-scope items, and validation method.
-- For any final product, feature, script, demo, agent, sync result, pull request, or operational document, run realistic scenario validation. API, function, build, or command checks are supporting evidence only.
+- For any final product, feature, script, demo, agent, sync result, pull request, operational document, handoff prompt, user story, or plan, run realistic scenario validation with a daily-use example. API, function, build, or command checks are supporting evidence only.
 - Fix failed validation items and rerun the failed scenario before delivery. Do not present failed items as optional follow-up unless the user explicitly accepts the remaining risk.
 
 ## Interaction Recipe

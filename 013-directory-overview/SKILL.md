@@ -30,6 +30,13 @@ Build an initial map from a directory tree, then verify important inferences by 
 5. If the work creates or changes a product, feature, script, demo, agent, synchronization result, pull request, or other final deliverable, apply `references/scenario-validation.md` before delivery.
 6. Treat `references/original-prompt.md` only as migration history. The current SKILL.md and references take priority.
 
+## Directory Reading Rules
+
+- Label important inferences with `High confidence`, `Medium confidence`, or `Low confidence`.
+- Separate what the directory tree proves from what it only suggests.
+- If the user says not to read files, do not claim verification; list the files that should be sampled next.
+- Always include a short reading order or learning path when the user asks how to approach the directory.
+
 ## Scenario Validation Gate
 
 Before saying the work is done, validate each user-facing function or operational deliverable with a realistic operation. If a delivered system contains account login, use a real or reserved test account through the normal UI and verify successful login, failed login, session behavior, logout, and protected-route access. Do not replace this with a bare API smoke test.

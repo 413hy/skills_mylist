@@ -30,6 +30,14 @@ Guide the user through a task one action at a time. This skill intentionally avo
 5. If the work creates or changes a product, feature, script, demo, agent, synchronization result, pull request, or other final deliverable, apply `references/scenario-validation.md` before delivery.
 6. Treat `references/original-prompt.md` only as migration history. The current SKILL.md and references take priority.
 
+## Step Response Rules
+
+- Start every reply with an explicit step label, such as `Step 1` or `第 1 步`, matching the user's language when obvious.
+- Give exactly one executable action for the current turn.
+- Ask for exactly one feedback item or output to be sent back.
+- If the user already named the needed command or target and the context is sufficient, use that direct next action instead of adding a prerequisite confirmation step.
+- For browser login/debugging issues, prefer the simplest observable first, such as the visible error message; move to DevTools or Network only after that feedback if needed.
+
 ## Scenario Validation Gate
 
 Before saying the work is done, validate each user-facing function or operational deliverable with a realistic operation. If a delivered system contains account login, use a real or reserved test account through the normal UI and verify successful login, failed login, session behavior, logout, and protected-route access. Do not replace this with a bare API smoke test.

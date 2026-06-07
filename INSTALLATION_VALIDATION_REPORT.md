@@ -82,3 +82,16 @@
 ## 结论
 
 `001-016` 已经可以在 Codex 新进程中被重新加载并按 skill 目标工作。输出形态接近官方 skills：frontmatter 可识别，核心说明可稳定读取，references 按需加载，实际触发输出能体现对应工作流和真实场景自测门槛。
+
+## 2026-06-07 补充回归
+
+已在安装目录 `C:\Users\yuuhe\.codex\skills` 上完成最终前向调用验证：
+
+- 16 个自建 skill 全部重新安装。
+- 仓库版和安装版均通过 `quick_validate.py`。
+- 仓库版与安装版 96 个文件哈希一致。
+- 使用新的 `codex exec --ephemeral` 进程逐个运行 48 个实际调用用例。
+- 48 个用例全部通过。
+- 日志中未发现真实 `codex_core_skills::loader` 加载失败。
+
+详细记录见 `FORWARD_USAGE_VALIDATION_REPORT.md`。

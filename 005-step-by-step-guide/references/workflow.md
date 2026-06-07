@@ -30,3 +30,5 @@ Guide the user through a task one action at a time. This skill intentionally avo
 ## Output Shape
 
 Each response should contain one step, the expected feedback, and at most a short reason when it helps execution.
+
+Every response must start with an explicit step label such as `Step 1` or `第 1 步`, matching the user's language when obvious. Ask for exactly one feedback item. For browser login/debugging issues, prefer the simplest observable first, such as the visible error message; only move to DevTools/Network after that feedback if needed.

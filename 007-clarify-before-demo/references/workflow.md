@@ -23,6 +23,7 @@ Build complete demos only after the core business loop is clear. The skill preve
 
 - Separate facts, assumptions, and open questions.
 - Keep the implementation or document scope explicit.
+- For high-risk demos such as payment, authentication, destructive actions, production integrations, or sensitive data, label the risk and scope boundary before implementation.
 - Prefer existing project patterns, field names, test data, and connector conventions.
 - Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
 - Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.
