@@ -68,6 +68,8 @@ Use realistic daily-use scenario tests. API, function, build, or command checks 
 
 List normal, error, and boundary scenarios with sample data or accounts.
 
+Prefer scoped tests owned by this session's module. Shared smoke, end-to-end, integration, or checklist files belong to the integration session unless this task explicitly assigns them to you. If you must touch a shared test or checklist, document why and what coordination is needed.
+
 ## Delivery Document
 
 Write or update:

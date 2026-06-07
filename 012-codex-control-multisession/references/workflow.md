@@ -50,6 +50,7 @@ Every `docs/codex-sessions/tasks/session_n-task.md` file must include:
 - Agent fallback: if agent creation is unavailable, the worker must write `Agent creation unavailable` and compensate with explicit manual review steps. Small file count alone is not enough reason to skip agents when validation or integration risk exists.
 - Agent policy: give each agent clear ownership; tell agents they are not alone in the codebase and must not revert others' work.
 - Skill policy: call existing skills when appropriate; create project-local child skills only for reusable project-specific workflows and document them.
+- Test ownership policy: each worker should prefer scoped tests for its own module. Shared smoke, end-to-end, integration, or checklist files should be owned by the integration session unless explicitly assigned otherwise. If a worker must touch a shared test, it must document why and what coordination is needed.
 - Validation policy: use realistic daily-use scenario tests, not API or command smoke tests alone.
 - Return format: Agent Capability Check, Agent Need Assessment, agents used or `Agent creation unavailable`, changed files, decisions, skills called, child skills created, tests, evidence, blockers, risks, and next handoff needs.
 - Startup instruction: the worker session must read this task file, confirm its role, and then execute only its assigned scope.
@@ -64,6 +65,7 @@ Every `docs/codex-sessions/tasks/session_n-task.md` file must include:
 - Prefer task files over long pasted prompts.
 - Include delivery document paths in every worker task file.
 - Include explicit Agent Capability Check, Agent Need Assessment, agent delegation rules, and skill delegation rules in every worker task file.
+- Assign ownership for shared smoke, end-to-end, integration, and checklist files; default them to the integration session.
 - Prefer existing project patterns, field names, test data, and connector conventions.
 - Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
 - Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.

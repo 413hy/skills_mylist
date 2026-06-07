@@ -228,3 +228,89 @@
 - `npm test` 通过。
 
 结论：修复后的 `012` 不再只是“允许 session_n 创建 agents”，而是能通过任务文档推动 session_n 在具备能力时实际创建 agents；不具备能力时也必须显式报告并补偿验证。
+
+## 2026-06-07 追加：更多日常调用回归
+
+继续补充了 3 类更接近日常 Codex 使用的实际例子。
+
+### 场景 C：模糊用户体验优化需求
+
+输入摘要：
+
+> 帮我优化这个项目的用户体验。需求还不清楚，不要实现代码，不要创建 session_n 任务文件。
+
+结果：
+
+- `session_0` 读取项目上下文。
+- 没有实现代码。
+- 没有创建 `docs/codex-sessions/tasks/` 或任何 worker task 文件。
+- 只提出产品类型、用户体验方向、现有界面/材料、目标用户和核心任务等澄清问题。
+- 明确说明只有产品类型、目标用户、核心流程、优化范围和成功标准清楚后才拆 session。
+
+结论：通过。
+
+### 场景 D：内容发布系统完整闭环
+
+临时项目包含：
+
+- `src/articles.js`
+- `src/review.js`
+- `src/publish.js`
+- `tests/scenario-smoke.js`
+
+需求：
+
+- `session_1`：稿件草稿和编辑体验。
+- `session_2`：审核通过/驳回工作流。
+- `session_3`：发布模块和最终集成验收。
+
+流程：
+
+1. `session_0` 生成三个 `docs/codex-sessions/tasks/session_n-task.md`。
+2. 模拟三个 worker session 并行读取任务文件并执行。
+3. 三个 worker 均写入 `docs/codex-sessions/session_n-delivery.md`。
+4. 复核 delivery、集成清单和最终 `npm test`。
+
+结果：
+
+- 三个 task 文件均包含 `Agent Capability Check`、`Agent Need Assessment`、agent 必须创建条件、delivery 路径和真实场景验证。
+- 三个 worker 均按要求写入 delivery。
+- 三个 worker 的 active toolset 没有 agent 创建能力，因此均写入 `Agent creation unavailable` 并说明人工复核补偿。
+- 最终 `npm test` 通过，输出 `content-smoke ok`。
+
+发现的问题：
+
+- `session_1`、`session_2`、`session_3` 都编辑了同一个共享测试文件 `tests/scenario-smoke.js`。虽然最终场景没有丢失，但这暴露了并行 session 的实际风险：共享 smoke/end-to-end/integration 文件应由集成 session 默认拥有。
+
+修复：
+
+- 在 `SKILL.md`、`references/workflow.md`、`references/session-task-template.md` 中加入测试 ownership 规则：
+  - worker session 优先写自己模块范围内的 scoped tests。
+  - shared smoke、end-to-end、integration、checklist 文件默认由 integration session 拥有。
+  - 非 integration session 如果必须改共享测试文件，必须在 delivery 中说明原因和协调需求。
+
+### 场景 E：CRM CSV 导入/映射/导出任务文件生成
+
+临时项目包含：
+
+- `src/importer.js`
+- `src/mapper.js`
+- `src/exporter.js`
+
+需求：
+
+- `session_1`：客户 CSV 导入解析。
+- `session_2`：字段映射与校验。
+- `session_3`：CSV 导出和最终验收。
+
+测试重点：
+
+- 在用户没有显式提醒共享测试 ownership 的情况下，验证新版 `012` 是否会自然把测试 ownership 写入任务文件。
+
+结果：
+
+- 三个 task 文件均包含 `Agent Capability Check`。
+- 三个 task 文件均包含共享 smoke/integration/checklist ownership 规则。
+- 三个 task 文件均要求 scoped/module-owned tests。
+
+结论：通过。共享测试 ownership 已从“用户提醒时才有”变成 skill 的默认行为。

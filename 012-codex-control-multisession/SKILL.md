@@ -45,6 +45,8 @@ Use the current window as `session_0`, a requirements and control window. `sessi
 - If agents are useful, the worker session must create narrowly scoped agents with explicit ownership and integration rules.
 - Agents may call existing skills when their task matches a skill trigger.
 - A worker session may create project-local child skills only when the workflow is reusable across sessions or agents. It must document the skill path, trigger, owner, and validation evidence in its delivery document.
+- Worker sessions should prefer scoped tests owned by their module. Shared smoke, end-to-end, integration, or checklist files should be owned by the integration session unless the task file explicitly assigns otherwise.
+- If a non-integration session must touch a shared test or checklist file, it must document the reason and coordinate the expected change in its delivery document.
 - Worker sessions must report the `Agent Capability Check`, `Agent Need Assessment`, agents used or why agent creation was unavailable, changed files, decisions, skills called, child skills created, tests, realistic scenario evidence, blockers, and next handoff needs.
 
 ## Required Workflow

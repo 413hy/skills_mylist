@@ -108,3 +108,5 @@
 详细记录见 `012_FOCUSED_VALIDATION_REPORT.md`。
 
 2026-06-07 又追加了完整多 session 端到端模拟：`session_0` 在临时项目中生成多个 `session_n-task.md`，模拟 worker sessions 读取任务文件、执行任务、写 delivery，再由 `session_0` 复核 delivery 和 integration checklist。该轮测试发现并修复了 agents 创建规则不够硬的问题，现已升级为 `Agent Capability Check + Agent Need Assessment`：agent 能力可用且任务复杂时必须创建至少一个窄范围 agent；不可用时必须在 delivery 写 `Agent creation unavailable`。
+
+随后又追加更多日常调用回归：模糊用户体验优化需求、内容发布系统完整多 session 闭环、CRM CSV 导入/映射/导出任务文件生成。该轮发现并修复了共享测试文件 ownership 风险：worker session 默认写 scoped tests；shared smoke、end-to-end、integration、checklist 文件默认由 integration session 负责，其他 session 必须说明原因和协调需求后才能修改。
