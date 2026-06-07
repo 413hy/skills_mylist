@@ -38,12 +38,14 @@ Use the current window as `session_0`, a requirements and control window. `sessi
 
 - Every worker session must start from its task file: `docs/codex-sessions/tasks/session_n-task.md`.
 - Every worker session prompt must specify a delivery document path: `docs/codex-sessions/session_n-delivery.md`.
-- Each worker session must perform an `Agent Need Assessment` before implementation.
-- For complex, cross-file, multi-workflow, risky, or validation-heavy tasks, the default is to create at least one narrowly scoped agent unless the session explicitly justifies why agents are unnecessary.
+- Each worker session must perform an `Agent Capability Check` and `Agent Need Assessment` before implementation.
+- If agent/subagent creation is available and the task is complex, cross-file, multi-workflow, risky, or validation-heavy, the worker session must create at least one narrowly scoped agent before implementing.
+- If agent creation is unavailable, the worker session must state `Agent creation unavailable` in its delivery document and compensate with explicit manual review steps.
+- Do not treat small file count alone as enough reason to skip agents when validation or integration risk is nontrivial.
 - If agents are useful, the worker session must create narrowly scoped agents with explicit ownership and integration rules.
 - Agents may call existing skills when their task matches a skill trigger.
 - A worker session may create project-local child skills only when the workflow is reusable across sessions or agents. It must document the skill path, trigger, owner, and validation evidence in its delivery document.
-- Worker sessions must report the `Agent Need Assessment`, agents used or why none were used, changed files, decisions, skills called, child skills created, tests, realistic scenario evidence, blockers, and next handoff needs.
+- Worker sessions must report the `Agent Capability Check`, `Agent Need Assessment`, agents used or why agent creation was unavailable, changed files, decisions, skills called, child skills created, tests, realistic scenario evidence, blockers, and next handoff needs.
 
 ## Required Workflow
 

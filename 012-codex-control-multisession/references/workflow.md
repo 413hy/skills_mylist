@@ -23,7 +23,7 @@ Use the current Codex window as `session_0`, a requirements and control session.
 7. Write one task file per worker session at `docs/codex-sessions/tasks/session_n-task.md`; use `references/session-task-template.md` as the structure.
 8. Give the user short launch instructions, not long pasted prompts, when task files are available.
 9. Generate paste-ready prompts for `session_1`, `session_2`, etc. only when file writing is unavailable or the user explicitly asks for copy-paste prompts.
-10. Require each worker session to perform an `Agent Need Assessment`, decide which agents to create, which skills to call, whether a project-local child skill is justified, and how it will avoid overlap with other sessions.
+10. Require each worker session to perform an `Agent Capability Check` and `Agent Need Assessment`, decide which agents to create, which skills to call, whether a project-local child skill is justified, and how it will avoid overlap with other sessions.
 11. Require each worker session to write or update `docs/codex-sessions/session_n-delivery.md`.
 12. Maintain `docs/codex-sessions/session_0-state.md` or provide a pasteable state anchor when file writing is not appropriate.
 13. Reconcile returned delivery documents and evidence before declaring the overall work complete.
@@ -45,11 +45,13 @@ Every `docs/codex-sessions/tasks/session_n-task.md` file must include:
 - Inputs and files or modules to inspect.
 - Prohibited overlap with other sessions.
 - Required delivery document path: `docs/codex-sessions/session_n-delivery.md`.
-- Agent Need Assessment: before implementation, the worker must explicitly decide whether agents are needed. For complex, cross-file, multi-workflow, risky, or validation-heavy tasks, default to creating at least one narrowly scoped agent unless there is a clear reason not to.
+- Agent Capability Check: before implementation, the worker must state whether agent/subagent creation is available in that session.
+- Agent Need Assessment: before implementation, the worker must explicitly decide which agents are needed. If agent creation is available and the task is complex, cross-file, multi-workflow, risky, or validation-heavy, the worker must create at least one narrowly scoped agent before implementing.
+- Agent fallback: if agent creation is unavailable, the worker must write `Agent creation unavailable` and compensate with explicit manual review steps. Small file count alone is not enough reason to skip agents when validation or integration risk exists.
 - Agent policy: give each agent clear ownership; tell agents they are not alone in the codebase and must not revert others' work.
 - Skill policy: call existing skills when appropriate; create project-local child skills only for reusable project-specific workflows and document them.
 - Validation policy: use realistic daily-use scenario tests, not API or command smoke tests alone.
-- Return format: Agent Need Assessment, agents used or why no agents were used, changed files, decisions, skills called, child skills created, tests, evidence, blockers, risks, and next handoff needs.
+- Return format: Agent Capability Check, Agent Need Assessment, agents used or `Agent creation unavailable`, changed files, decisions, skills called, child skills created, tests, evidence, blockers, risks, and next handoff needs.
 - Startup instruction: the worker session must read this task file, confirm its role, and then execute only its assigned scope.
 
 ## Quality Gates
@@ -61,7 +63,7 @@ Every `docs/codex-sessions/tasks/session_n-task.md` file must include:
 - Use numbered session names exactly: `session_1`, `session_2`, etc.
 - Prefer task files over long pasted prompts.
 - Include delivery document paths in every worker task file.
-- Include explicit Agent Need Assessment, agent delegation rules, and skill delegation rules in every worker task file.
+- Include explicit Agent Capability Check, Agent Need Assessment, agent delegation rules, and skill delegation rules in every worker task file.
 - Prefer existing project patterns, field names, test data, and connector conventions.
 - Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.
 - Failed checks must be fixed and rerun; do not substitute command success for user workflow validation.

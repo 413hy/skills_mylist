@@ -131,3 +131,100 @@
 - 能要求各 worker session 自主做 Agent Need Assessment，并在复杂任务中默认创建 agents 协作。
 - 能要求 worker sessions 调用已有 skills，必要时创建项目内 child skills。
 - 能要求每个 worker session 写 delivery 文档，并用真实场景验证交付。
+
+## 2026-06-07 追加：端到端多 session 模拟
+
+为进一步验证完整闭环，又创建了两个临时 mock 项目做端到端测试。测试目录均在 `%TEMP%` 下，不属于本仓库内容。
+
+### 场景 A：Mock Admin Project
+
+目标：验证 `session_0 -> 多个 session_n task 文件 -> 多个 worker session 并行执行 -> delivery 文档 -> session_0 复核` 的完整流程。
+
+临时项目包含：
+
+- `src/auth.js`
+- `src/orders.js`
+- `src/reports.js`
+- `tests/scenario-smoke.js`
+
+流程：
+
+1. 使用 `$codex-control-multisession` 让 `session_0` 读取项目并生成：
+   - `docs/codex-sessions/tasks/session_1-task.md`
+   - `docs/codex-sessions/tasks/session_2-task.md`
+   - `docs/codex-sessions/tasks/session_3-task.md`
+   - `docs/codex-sessions/session_0-state.md`
+   - `docs/codex-sessions/integration-checklist.md`
+2. 模拟用户创建三个新窗口，分别把任务文件路径交给 `session_1`、`session_2`、`session_3`。
+3. 三个 worker session 并行执行并写入：
+   - `docs/codex-sessions/session_1-delivery.md`
+   - `docs/codex-sessions/session_2-delivery.md`
+   - `docs/codex-sessions/session_3-delivery.md`
+4. `session_0` 根据三个 delivery 和 integration checklist 做最终复核。
+
+验证结果：
+
+- `session_0` 没有实现产品代码，只生成任务文档和状态文档。
+- 三个 task 文件均包含 `Agent Need Assessment`、skills、child skill、delivery 路径、真实场景验证要求。
+- 三个 worker session 均写入 delivery。
+- 三个 worker session 均记录了 `Agent Need Assessment`。
+- 该轮模拟 worker 环境没有 subagent creation tool，因此 delivery 均写明未创建 agents 的原因，并使用人工复核与场景测试补偿。
+- `session_0` 复核了三个 delivery 和 integration checklist，并复跑测试。
+
+复跑命令结果：
+
+- `node tests/auth-scenarios.js` -> 通过
+- `node tests/order-scenarios.js` -> 通过
+- `node tests/report-scenarios.js` -> 通过
+- `npm test` -> 通过
+
+发现的问题：
+
+- task 文件原本要求 `Agent Need Assessment`，但当 worker 环境没有 agent 创建工具时，worker 会合理跳过创建 agents。这能记录风险，但还不够强地推动“有能力时必须创建 agents”。
+
+修复：
+
+- 将规则升级为 `Agent Capability Check + Agent Need Assessment`。
+- 明确要求：如果 agent/subagent creation 可用，且任务复杂、跨文件、多工作流、高风险或验证重，则必须创建至少一个窄范围 agent。
+- 如果 agent creation 不可用，delivery 必须写 `Agent creation unavailable`，并说明补偿性人工复核步骤。
+- 明确写入：不能只因为文件少就跳过 agents。
+
+### 场景 B：Mock Inventory Project
+
+目标：验证修复后的任务文档是否会强制写入 `Agent Capability Check` 和“有能力则必须创建 agent”的规则。
+
+临时项目包含：
+
+- `src/inventory.js`
+- `src/purchase.js`
+- `src/alerts.js`
+
+`session_0` 生成：
+
+- `docs/codex-sessions/tasks/session_1-task.md`
+- `docs/codex-sessions/tasks/session_2-task.md`
+- `docs/codex-sessions/tasks/session_3-task.md`
+
+自动检查结果：三个 task 文件均包含：
+
+- `Agent Capability Check`
+- `Agent Need Assessment`
+- agent 可用且任务复杂时必须创建至少一个 agent
+- agent 不可用时必须写 `Agent creation unavailable`
+- skills 调用规则
+- child skill 创建规则
+- `docs/codex-sessions/session_n-delivery.md`
+- 真实场景验证要求
+
+随后模拟 `session_1` 读取 `docs/codex-sessions/tasks/session_1-task.md` 并执行。
+
+结果：
+
+- `session_1` 在 delivery 中写入 `Agent Capability Check`。
+- `session_1` 识别当前 session 具有 `spawn_agent` 能力。
+- `session_1` 实际创建了一个只读 inventory interface explorer agent。
+- delivery 记录了 agent id、agent 角色、检查范围和建议。
+- delivery 同时记录了 skills、测试、真实场景验证、child skill 判断和交付路径。
+- `npm test` 通过。
+
+结论：修复后的 `012` 不再只是“允许 session_n 创建 agents”，而是能通过任务文档推动 session_n 在具备能力时实际创建 agents；不具备能力时也必须显式报告并补偿验证。

@@ -106,3 +106,5 @@
 - 每个 worker session 是否被要求先做 `Agent Need Assessment`，复杂任务默认自主创建 agents 协作。
 
 详细记录见 `012_FOCUSED_VALIDATION_REPORT.md`。
+
+2026-06-07 又追加了完整多 session 端到端模拟：`session_0` 在临时项目中生成多个 `session_n-task.md`，模拟 worker sessions 读取任务文件、执行任务、写 delivery，再由 `session_0` 复核 delivery 和 integration checklist。该轮测试发现并修复了 agents 创建规则不够硬的问题，现已升级为 `Agent Capability Check + Agent Need Assessment`：agent 能力可用且任务复杂时必须创建至少一个窄范围 agent；不可用时必须在 delivery 写 `Agent creation unavailable`。
