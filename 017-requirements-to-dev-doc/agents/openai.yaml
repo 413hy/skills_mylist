@@ -1,0 +1,4 @@
+interface:
+  display_name: "Requirements Dev Doc"
+  short_description: "Clarify needs and prepare a handoff dev doc."
+  default_prompt: "Use $requirements-to-dev-doc to clarify this request and write a dev requirements document for 012."

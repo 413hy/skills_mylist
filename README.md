@@ -1,12 +1,12 @@
 # 常用 skills 合集
 
-这个仓库只收录自建优化后的 skills：`001-016`。
+这个仓库只收录自建优化后的 skills：`001-018`。
 
 第三方或别人已经做好的 skills，例如 AnySearch、GSAP 系列、PDF Template Generator 等，不随本仓库上传。它们只在本文档里作为“推荐搭配安装的 skills”列出，避免把别人的 skill 源码重复提交进这个仓库。
 
 ## 如何找
 
-- `001-016`：本仓库实际包含的自建 skills。
+- `001-018`：本仓库实际包含的自建 skills。
 - `101-114`：推荐搭配安装的第三方/本机已有 skills 编号，只作为索引说明，不对应本仓库目录。
 - 自建 skill 目录名带序号，方便肉眼排序；`SKILL.md` 里的 `name` 保持无序号，方便实际调用，例如 `$pr-check-commit-pr`。
 
@@ -22,7 +22,7 @@
 
 自建 skills 已统一加入真实场景自测门槛：凡是交付代码、demo、脚本、Agent、PR、同步结果或最终产品功能，都必须用用户真实会执行的操作样例验证。比如登录功能必须用测试账号从正常入口登录、验证错误密码、会话保持、退出登录和受保护页面访问，不能只测登录接口是否 200。
 
-逐个 skill 的代表性 dry-run 自测记录见 `SELF_TEST_REPORT.md`。逐个 skill 的调用式输入/输出模拟记录见 `CALL_SIMULATION_REPORT.md`。安装到 Codex skills 目录并通过新 `codex exec` 进程重载触发的验证记录见 `INSTALLATION_VALIDATION_REPORT.md`。最终 16 个 skill × 3 个实际调用用例的前向验证记录见 `FORWARD_USAGE_VALIDATION_REPORT.md`。`012-codex-control-multisession` 的需求总控、文件式任务分发和 Agent Need Assessment 聚焦验证见 `012_FOCUSED_VALIDATION_REPORT.md`。
+逐个 skill 的代表性 dry-run 自测记录见 `SELF_TEST_REPORT.md`。逐个 skill 的调用式输入/输出模拟记录见 `CALL_SIMULATION_REPORT.md`。安装到 Codex skills 目录并通过新 `codex exec` 进程重载触发的验证记录见 `INSTALLATION_VALIDATION_REPORT.md`。最终 16 个 skill × 3 个实际调用用例的前向验证记录见 `FORWARD_USAGE_VALIDATION_REPORT.md`。`012-codex-control-multisession` 的需求总控、文件式任务分发和 Agent Need Assessment 聚焦验证见 `012_FOCUSED_VALIDATION_REPORT.md`。`017-requirements-to-dev-doc` 的需求澄清到开发文档、再交给 012 的聚焦验证见 `017_FOCUSED_VALIDATION_REPORT.md`。`018-quota-resilient-handoff` 的额度不足续跑、automation fallback 和不草率完成验证见 `018_FOCUSED_VALIDATION_REPORT.md`。
 
 ## 目录
 
@@ -44,6 +44,8 @@
 > 14. LangChain Agent 规划 - `014-langchain-agent-planner/`
 > 15. LangGraph Agent 规划 - `015-langgraph-agent-planner/`
 > 16. 多 Agent 架构师 - `016-multi-agent-architect/`
+> 17. 需求澄清开发文档 - `017-requirements-to-dev-doc/`
+> 18. 额度续跑交接 - `018-quota-resilient-handoff/`
 
 ### 推荐搭配安装但不随仓库上传的 skills
 
@@ -82,3 +84,5 @@
 | 14 | LangChain Agent 规划 | `014-langchain-agent-planner/` | 创建 LangChain Agent 前澄清工具、记忆、输入输出和评估样例。 |
 | 15 | LangGraph Agent 规划 | `015-langgraph-agent-planner/` | 创建 LangGraph 工作流前澄清状态、节点、边、循环和真实流程测试。 |
 | 16 | 多 Agent 架构师 | `016-multi-agent-architect/` | 判断是否需要多 Agent，并设计角色、通信、调度和协作剧本验证。 |
+| 17 | 需求澄清开发文档 | `017-requirements-to-dev-doc/` | 在 012 之前澄清需求并写成可移交的开发需求文档。 |
+| 18 | 额度续跑交接 | `018-quota-resilient-handoff/` | 额度、上下文或验证风险出现时暂停并生成可续跑交接，避免草率完成。 |

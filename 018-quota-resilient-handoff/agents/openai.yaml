@@ -1,0 +1,4 @@
+interface:
+  display_name: "Quota-Resilient Handoff"
+  short_description: "Pause safely and resume long Codex work when quota is tight."
+  default_prompt: "Use $quota-resilient-handoff before rushing long work."
