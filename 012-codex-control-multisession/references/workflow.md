@@ -22,8 +22,8 @@ Use the current Codex window as `session_0`, a requirements and control session.
 6. Define session roles, ownership boundaries, inputs, outputs, forbidden overlap, dependencies, and expected delivery document paths.
 7. Write one task file per worker session at `docs/codex-sessions/tasks/session_n-task.md`; use `references/session-task-template.md` as the structure.
 8. Give the user short launch instructions, not long pasted prompts, when task files are available.
-9. Generate paste-ready prompts for `session_1`, `session_2`, etc. only when file writing is unavailable or the user explicitly asks for copy-paste prompts.
-10. Require each worker session to perform an `Agent Capability Check` and `Agent Need Assessment`, decide which agents to create, which skills to call, whether a project-local child skill is justified, and how it will avoid overlap with other sessions.
+9. Generate paste-ready prompts for `session_1`, `session_2`, etc. only when file writing is unavailable or the user explicitly asks for copy-paste prompts. Paste-ready prompts must be contract-complete task files in prompt form, not condensed summaries.
+10. Require each worker session to perform an `Agent Capability Check` and `Agent Need Assessment` before any substantive work, decide which agents to create, which skills to call, whether a project-local child skill is justified, and how it will avoid overlap with other sessions.
 11. Require each worker session to write or update `docs/codex-sessions/session_n-delivery.md`.
 12. Maintain `docs/codex-sessions/session_0-state.md` or provide a pasteable state anchor when file writing is not appropriate.
 13. Reconcile returned delivery documents and evidence before declaring the overall work complete.
@@ -39,14 +39,14 @@ Use the current Codex window as `session_0`, a requirements and control session.
 
 ## Worker Task File Requirements
 
-Every `docs/codex-sessions/tasks/session_n-task.md` file must include:
+Every `docs/codex-sessions/tasks/session_n-task.md` file and every paste-ready `session_n` prompt must include:
 
 - Role and ownership boundary.
 - Inputs and files or modules to inspect.
 - Prohibited overlap with other sessions.
 - Required delivery document path: `docs/codex-sessions/session_n-delivery.md`.
-- Agent Capability Check: before implementation, the worker must state whether agent/subagent creation is available in that session.
-- Agent Need Assessment: before implementation, the worker must explicitly decide which agents are needed. If agent creation is available and the task is complex, cross-file, multi-workflow, risky, or validation-heavy, the worker must create at least one narrowly scoped agent before implementing.
+- Agent Capability Check: before research, planning, drafting, implementation, or validation, the worker must state whether agent/subagent creation is available in that session.
+- Agent Need Assessment: before substantive work, the worker must explicitly decide which agents are needed. If agent creation is available and the task is complex, cross-file, multi-workflow, risky, validation-heavy, or benefits from an independent review perspective, the worker must create at least one narrowly scoped agent before substantive work.
 - Agent fallback: if agent creation is unavailable, the worker must write `Agent creation unavailable` and compensate with explicit manual review steps. Small file count alone is not enough reason to skip agents when validation or integration risk exists.
 - Agent policy: give each agent clear ownership; tell agents they are not alone in the codebase and must not revert others' work.
 - Skill policy: call existing skills when appropriate; create project-local child skills only for reusable project-specific workflows and document them.
@@ -54,6 +54,23 @@ Every `docs/codex-sessions/tasks/session_n-task.md` file must include:
 - Validation policy: use realistic daily-use scenario tests, not API or command smoke tests alone.
 - Return format: Agent Capability Check, Agent Need Assessment, agents used or `Agent creation unavailable`, changed files, decisions, skills called, child skills created, tests, evidence, blockers, risks, and next handoff needs.
 - Startup instruction: the worker session must read this task file, confirm its role, and then execute only its assigned scope.
+
+## Paste-Ready Prompt Requirements
+
+When `session_0` cannot write task files, each paste-ready prompt must include this block, adapted with the correct session number and delivery path:
+
+```text
+Worker Contract:
+1. Treat this prompt as your session task file.
+2. Start with Agent Capability Check before research, planning, drafting, implementation, or validation.
+3. Then perform Agent Need Assessment. If agents/subagents are available and this task is complex, risky, validation-heavy, multi-workflow, or benefits from independent review, create 1-3 narrowly scoped agents before substantive work. If not, explain why and how you will compensate.
+4. Call relevant skills before working.
+5. Do only the assigned scope and respect other sessions' ownership.
+6. Write or update docs/codex-sessions/session_n-delivery.md. If writing files is not allowed, output the exact equivalent Markdown in the response and state the intended path.
+7. The delivery must include Agent Capability Check, Agent Need Assessment, agents used or why not, skills called, changed files or no-file statement, decisions, validation evidence, blockers, risks, and next handoff needs.
+```
+
+If a generated worker prompt does not include this block or equivalent requirements, it is incomplete and must be corrected before the user launches that session.
 
 ## Quality Gates
 
@@ -63,8 +80,9 @@ Every `docs/codex-sessions/tasks/session_n-task.md` file must include:
 - Do not split sessions before the requirement is clear enough to assign ownership.
 - Use numbered session names exactly: `session_1`, `session_2`, etc.
 - Prefer task files over long pasted prompts.
+- Treat paste-ready prompts as task files in prompt form; do not omit delivery paths, agent policy, skill policy, validation duties, or return format.
 - Include delivery document paths in every worker task file.
-- Include explicit Agent Capability Check, Agent Need Assessment, agent delegation rules, and skill delegation rules in every worker task file.
+- Include explicit Agent Capability Check, Agent Need Assessment, agent delegation rules, and skill delegation rules in every worker task file and paste-ready prompt.
 - Assign ownership for shared smoke, end-to-end, integration, and checklist files; default them to the integration session.
 - Prefer existing project patterns, field names, test data, and connector conventions.
 - Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.

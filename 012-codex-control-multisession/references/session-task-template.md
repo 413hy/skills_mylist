@@ -2,12 +2,24 @@
 
 Use this structure when `session_0` writes `docs/codex-sessions/tasks/session_n-task.md`.
 
+When file writing is unavailable or the user asks for copy-paste launch prompts, use the same structure as a paste-ready prompt. Do not shorten it into a role summary; the prompt must preserve the startup instruction, agent policy, skill policy, delivery document path, validation duties, and return format.
+
 ```md
 # session_n Task
 
 ## Startup Instruction
 
-You are `session_n`. Read this file first, confirm your role, and execute only the scope assigned here. Do not rely on hidden context from `session_0`.
+You are `session_n`. Read this file or prompt first, confirm your role, and execute only the scope assigned here. Do not rely on hidden context from `session_0`.
+
+## Worker Contract
+
+1. Treat this file or prompt as your session task file.
+2. Start with Agent Capability Check before research, planning, drafting, implementation, or validation.
+3. Then perform Agent Need Assessment. If agents/subagents are available and this task is complex, risky, validation-heavy, multi-workflow, or benefits from independent review, create 1-3 narrowly scoped agents before substantive work. If not, explain why and how you will compensate.
+4. Call relevant skills before working.
+5. Do only the assigned scope and respect other sessions' ownership.
+6. Write or update `docs/codex-sessions/session_n-delivery.md`. If writing files is not allowed, output the exact equivalent Markdown in the response and state the intended path.
+7. The delivery must include Agent Capability Check, Agent Need Assessment, agents used or why not, skills called, changed files or no-file statement, decisions, validation evidence, blockers, risks, and next handoff needs.
 
 ## Role
 
@@ -41,9 +53,9 @@ State the user-facing goal this session contributes to.
 
 ## Agent Policy
 
-- Before implementation, write an `Agent Capability Check` in your working notes and delivery document: state whether this session has a tool or mechanism to create agents/subagents.
+- Before research, planning, drafting, implementation, or validation, write an `Agent Capability Check` in your working notes and delivery document: state whether this session has a tool or mechanism to create agents/subagents.
 - Then write an `Agent Need Assessment`: identify which parts of the task benefit from independent agents.
-- If agent/subagent creation is available and this task is complex, cross-file, multi-workflow, risky, or validation-heavy, create at least one narrowly scoped agent before implementation.
+- If agent/subagent creation is available and this task is complex, cross-file, multi-workflow, risky, validation-heavy, or benefits from independent review, create at least one narrowly scoped agent before substantive work.
 - If agent creation is unavailable, write `Agent creation unavailable` in the delivery document and compensate with explicit manual review steps.
 - Do not treat small file count alone as enough reason to skip agents when validation or integration risk exists.
 - Consider agents for independent codebase exploration, test/validation planning, UI review, API/data model inspection, or risk review.
@@ -75,6 +87,8 @@ Prefer scoped tests owned by this session's module. Shared smoke, end-to-end, in
 Write or update:
 
 `docs/codex-sessions/session_n-delivery.md`
+
+If this session is running from a paste-ready prompt and file writing is not allowed, do not write the file. Instead, output the exact equivalent Markdown in the response and clearly state that the intended path is `docs/codex-sessions/session_n-delivery.md`.
 
 The delivery document must include Agent Capability Check, Agent Need Assessment, agents used or `Agent creation unavailable`, changed files, decisions, skills called, child skills created, tests, realistic scenario evidence, blockers, risks, and next handoff needs.
 
