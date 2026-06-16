@@ -53,6 +53,8 @@ Every `docs/codex-sessions/tasks/session_n-task.md` file and every paste-ready `
 - Test ownership policy: each worker should prefer scoped tests for its own module. Shared smoke, end-to-end, integration, or checklist files should be owned by the integration session unless explicitly assigned otherwise. If a worker must touch a shared test, it must document why and what coordination is needed.
 - Validation policy: use realistic daily-use scenario tests, not API or command smoke tests alone.
 - Return format: Agent Capability Check, Agent Need Assessment, agents used or `Agent creation unavailable`, changed files, decisions, skills called, child skills created, tests, evidence, blockers, risks, and next handoff needs.
+- Delivery path format: the worker's final answer or delivery file must include a top-level `## Delivery Document Path` section with the exact path in backticks. A path in the title alone is not enough.
+- Return section format: the worker's final answer or delivery file must end with a top-level `## Return To session_0` section that states the path and completion status.
 - Startup instruction: the worker session must read this task file, confirm its role, and then execute only its assigned scope.
 
 ## Paste-Ready Prompt Requirements
@@ -68,9 +70,28 @@ Worker Contract:
 5. Do only the assigned scope and respect other sessions' ownership.
 6. Write or update docs/codex-sessions/session_n-delivery.md. If writing files is not allowed, output the exact equivalent Markdown in the response and state the intended path.
 7. The delivery must include Agent Capability Check, Agent Need Assessment, agents used or why not, skills called, changed files or no-file statement, decisions, validation evidence, blockers, risks, and next handoff needs.
+8. The first screen of the final answer must include a `## Delivery Document Path` section with the exact path in backticks. The final answer must end with `## Return To session_0`.
 ```
 
 If a generated worker prompt does not include this block or equivalent requirements, it is incomplete and must be corrected before the user launches that session.
+
+## Worker Delivery Acceptance Gate
+
+When a worker reports back, `session_0` must reject the delivery and ask for a corrected handoff if any required section is missing. Required sections:
+
+- `## Delivery Document Path`
+- `## Agent Capability Check`
+- `## Agent Need Assessment`
+- `## Agents Used` or `## Agent Fallback`
+- `## Skills Called`
+- `## Changed Files` or `## No File Changes`
+- `## Validation Evidence`
+- `## Blockers`
+- `## Risks`
+- `## Next Handoff Needs`
+- `## Return To session_0`
+
+Do not treat a filename in the heading, a prose mention of the path, or an implicit final summary as satisfying these sections. The point is to make worker output easy for `session_0` and the user to audit without rereading the whole answer.
 
 ## Quality Gates
 
@@ -83,6 +104,7 @@ If a generated worker prompt does not include this block or equivalent requireme
 - Treat paste-ready prompts as task files in prompt form; do not omit delivery paths, agent policy, skill policy, validation duties, or return format.
 - Include delivery document paths in every worker task file.
 - Include explicit Agent Capability Check, Agent Need Assessment, agent delegation rules, and skill delegation rules in every worker task file and paste-ready prompt.
+- Include the delivery acceptance gate in every worker task file and paste-ready prompt, especially when file writing is disabled.
 - Assign ownership for shared smoke, end-to-end, integration, and checklist files; default them to the integration session.
 - Prefer existing project patterns, field names, test data, and connector conventions.
 - Apply `references/scenario-validation.md` whenever the output affects a real workflow or downstream user.

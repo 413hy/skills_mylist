@@ -20,6 +20,8 @@ You are `session_n`. Read this file or prompt first, confirm your role, and exec
 5. Do only the assigned scope and respect other sessions' ownership.
 6. Write or update `docs/codex-sessions/session_n-delivery.md`. If writing files is not allowed, output the exact equivalent Markdown in the response and state the intended path.
 7. The delivery must include Agent Capability Check, Agent Need Assessment, agents used or why not, skills called, changed files or no-file statement, decisions, validation evidence, blockers, risks, and next handoff needs.
+8. The first screen of your final answer must include `## Delivery Document Path` with the exact path in backticks. A filename in the title is not enough.
+9. Your final answer must end with `## Return To session_0`, stating the delivery path and whether you are complete, blocked, or need integration help.
 
 ## Role
 
@@ -92,7 +94,41 @@ If this session is running from a paste-ready prompt and file writing is not all
 
 The delivery document must include Agent Capability Check, Agent Need Assessment, agents used or `Agent creation unavailable`, changed files, decisions, skills called, child skills created, tests, realistic scenario evidence, blockers, risks, and next handoff needs.
 
+Use these top-level sections exactly:
+
+```md
+## Delivery Document Path
+
+`docs/codex-sessions/session_n-delivery.md`
+
+## Agent Capability Check
+
+## Agent Need Assessment
+
+## Agents Used
+
+If no agents were used, replace this with `## Agent Fallback`.
+
+## Skills Called
+
+## Changed Files
+
+If no files changed, use `## No File Changes`.
+
+## Decisions
+
+## Validation Evidence
+
+## Blockers
+
+## Risks
+
+## Next Handoff Needs
+
+## Return To session_0
+```
+
 ## Return To session_0
 
-Tell `session_0` the delivery document path and summarize whether the session is complete, blocked, or needs integration help.
+Tell `session_0` the delivery document path and summarize whether the session is complete, blocked, or needs integration help. This must be a top-level section in the delivery, not only a final sentence.
 ```

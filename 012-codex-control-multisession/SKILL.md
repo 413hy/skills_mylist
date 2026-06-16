@@ -49,6 +49,8 @@ Use the current window as `session_0`, a requirements and control window. `sessi
 - Worker sessions should prefer scoped tests owned by their module. Shared smoke, end-to-end, integration, or checklist files should be owned by the integration session unless the task file explicitly assigns otherwise.
 - If a non-integration session must touch a shared test or checklist file, it must document the reason and coordinate the expected change in its delivery document.
 - Worker sessions must report the `Agent Capability Check`, `Agent Need Assessment`, agents used or why agent creation was unavailable, changed files, decisions, skills called, child skills created, tests, realistic scenario evidence, blockers, and next handoff needs.
+- Every worker delivery must include an exact `## Delivery Document Path` section near the top, not only a filename in a title or prose sentence.
+- Every worker delivery must end with an exact `## Return To session_0` section that states the delivery path and whether the session is complete, blocked, or needs integration help.
 
 ## Paste-Ready Prompt Contract
 
@@ -63,9 +65,26 @@ Worker Contract:
 5. Do only the assigned scope and respect other sessions' ownership.
 6. Write or update docs/codex-sessions/session_n-delivery.md. If writing files is not allowed, output the exact equivalent Markdown in the response and state the intended path.
 7. The delivery must include Agent Capability Check, Agent Need Assessment, agents used or why not, skills called, changed files or no-file statement, decisions, validation evidence, blockers, risks, and next handoff needs.
+8. The first screen of the final answer must include a `## Delivery Document Path` section with the exact path in backticks. The final answer must end with `## Return To session_0`.
 ```
 
 Do not abbreviate this contract away when the user asks for copy-paste task packages. If a previous prompt omitted it, `session_0` must send a corrective follow-up before accepting that worker's delivery.
+
+## session_0 Acceptance Gate
+
+Before telling the user that a worker session is complete, `session_0` must inspect the worker's final answer or delivery file. Accept it only if all of these are present:
+
+- `## Delivery Document Path` with the exact expected path.
+- `## Agent Capability Check`.
+- `## Agent Need Assessment`.
+- Agents used, or a clear reason agents were unavailable or not used.
+- Skills called.
+- Changed files, or a no-file/no-code statement when the session was planning-only.
+- Validation evidence or scenario/document validation.
+- Blockers, risks, and next handoff needs.
+- `## Return To session_0` with complete/blocked/needs-integration status.
+
+If any item is missing or only implied, do not summarize the worker as complete. Send a corrective follow-up to that session asking for a standardized delivery document before continuing orchestration.
 
 ## Required Workflow
 
@@ -89,6 +108,7 @@ For non-code deliverables, run a representative sample through the document, pla
 - When clear, provide a requirement mirror, ownership map, created `session_n` task file paths, one-line launch instructions, delivery document paths, validation duties, integration checklist, and `session_0` state anchor.
 - Prefer task files over long pasted prompts. Use paste-ready prompts only as a fallback when task files cannot be written, and make each paste-ready prompt contract-complete.
 - Require every worker session to write or update `docs/codex-sessions/session_n-delivery.md`.
+- Do not accept title-only or prose-only delivery paths; require the exact `## Delivery Document Path` section.
 - Call out unresolved assumptions, blocked sessions, and evidence that `session_0` must inspect before declaring the overall work complete.
 
 ## References
